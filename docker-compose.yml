@@ -1,0 +1,46 @@
+services:
+  # Serviço da Aplicação PHP
+  app:
+    build:
+      context: . # Constrói a imagem a partir do Dockerfile na pasta atual
+      dockerfile: Dockerfile # Especifica o nome do Dockerfile (opcional se for 'Dockerfile')
+    ports:
+      - "8080:80" # Mapeia a porta 8080 do seu computador para a porta 80 do contêiner da aplicação
+    environment:
+      # Variáveis de ambiente que serão usadas pelo seu script PHP
+      DB_HOST: db          # O nome do serviço do banco de dados (definido abaixo)
+      DB_USER: root        # Usuário do banco de dados (para MySQL, usaremos o root aqui)
+      DB_PASSWORD: Siena5173 # Senha do banco de dados (a mesma que definiremos no serviço 'db')
+      DB_NAME: projeto_pim   # Nome do banco de dados (o mesmo que definiremos no serviço 'db')
+    volumes:
+      # Monta o código-fonte do seu projeto dentro do contêiner.
+      - ./.:/var/www/html
+    depends_on: # <<< MODIFICADO AQUI
+      db:
+        condition: service_healthy # Garante que o serviço 'db' esteja saudável antes do 'app' iniciar
+
+  # Serviço do Banco de Dados MySQL
+  db:
+    image: mysql:8.0 # Usa uma imagem oficial do MySQL (versão 8.0 é uma boa escolha estável)
+    container_name: meu_mysql_db_compose # Nome amigável para o contêiner do banco de dados
+    restart: always # Reinicia o contêiner automaticamente se ele parar
+    environment:
+      # Variáveis de ambiente para configurar o MySQL na primeira inicialização
+      MYSQL_ROOT_PASSWORD: Siena5173 # Define a senha para o usuário root do MySQL
+      MYSQL_DATABASE: projeto_pim    # Cria este banco de dados automaticamente
+    ports:
+      - "3306:3306" # Mapeia a porta do host para a porta do contêiner MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql # Volume para persistência dos dados do banco
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # <<< ADICIONADO AQUI para carregar seu script SQL inicial
+    healthcheck: # <<< ADICIONADO AQUI
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-pSiena5173"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s # Dá um tempo para o MySQL iniciar antes de começar os healthchecks
+    # command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci'] # Opcional
+
+# Define os volumes nomeados que serão gerenciados pelo Docker
+volumes:
+  mysql_data: # Nome do volume para persistir os dados do MySQL

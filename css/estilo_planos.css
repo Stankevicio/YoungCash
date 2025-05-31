@@ -1,0 +1,473 @@
+:root {
+  --primary-color: #2c3e50; /* Roxo principal */
+  --secondary-color: #2c3e50; /* Roxo mais claro */
+  --accent-color: #e7a900; /* Dourado para destaques (FUNDO DO HEADER) */
+  --text-color-dark: #2c3e50; /* Azul escuro para texto (TEXTO NO HEADER AMARELO e NAV) */
+  --text-color-light: #555;
+  --background-light: #f8f9fa; /* Fundo claro para seções */
+  --white-color: #ffffff;
+  --border-radius: 8px;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+  /* Variáveis para a navbar, usando cores já definidas */
+  --navbar-text-color: var(--text-color-dark);
+  --navbar-text-hover-color: #000000; /* Preto para hover/ativo para mais contraste */
+  --navbar-brand-color: var(--text-color-dark);
+  --navbar-button-border-color: var(--text-color-dark);
+  --navbar-button-text-color: var(--text-color-dark);
+  --navbar-button-hover-bg-color: var(--text-color-dark);
+  --navbar-button-hover-text-color: var(--white-color);
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-color-dark);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.container {
+  /* Container da página de Planos */
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* CABEÇALHO DA PÁGINA com Navbar Integrada */
+.page-header {
+  background: var(--accent-color);
+  color: var(--text-color-dark);
+  text-align: center;
+  padding: 10px 0 30px 0;
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  border-bottom-left-radius: 50% 20px;
+  border-bottom-right-radius: 50% 20px;
+}
+
+/* Container dentro do page-header precisa de padding para não colar nas bordas */
+.page-header .container {
+  padding-left: 15px; /* Padding lateral para o conteúdo do container */
+  padding-right: 15px;
+}
+
+/* Navbar Customizada YoungCash */
+.youngcash-navbar {
+  background-color: transparent !important; /* Fundamental para amalgamar */
+  padding-top: 0.5rem; /* Padding vertical da navbar */
+  padding-bottom: 1rem; /* Espaço abaixo da navbar antes do H1 */
+  margin-bottom: 25px; /* Espaço entre navbar e título h1 */
+  box-shadow: none;
+  border-bottom: 1px solid rgba(44, 62, 80, 0.15); /* Linha sutil separadora */
+  font-family: "Roboto", sans-serif; /* Garantir a fonte correta */
+}
+
+.youngcash-navbar .navbar-brand {
+  color: var(--navbar-brand-color) !important; /* Sobrescrever Bootstrap */
+  font-weight: 700;
+  font-size: 1.8em; /* Tamanho da marca */
+}
+.youngcash-navbar .navbar-brand:hover {
+  color: var(--navbar-text-hover-color) !important;
+}
+
+.youngcash-navbar .navbar-nav .nav-link {
+  color: var(--navbar-text-color) !important; /* Sobrescrever Bootstrap */
+  font-size: 1.05em; /* Tamanho dos links */
+  font-weight: 500;
+  margin-left: 8px; /* Espaçamento entre links */
+  margin-right: 8px;
+  padding: 0.5rem 0.8rem; /* Padding dos links */
+  border-radius: var(--border-radius);
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+.youngcash-navbar .navbar-nav .nav-link:hover {
+  color: var(--navbar-text-hover-color) !important;
+  background-color: rgba(44, 62, 80, 0.05); /* Leve fundo no hover */
+}
+.youngcash-navbar .navbar-nav .nav-link.active-planos {
+  /* Estilo para o link da página atual */
+  color: var(--navbar-text-hover-color) !important;
+  font-weight: 700;
+  background-color: rgba(44, 62, 80, 0.1); /* Destaque maior para ativo */
+}
+
+/* Botão "Entrar" na Navbar */
+.youngcash-navbar .btn-entrar-custom {
+  border: 2px solid var(--navbar-button-border-color);
+  color: var(
+    --navbar-button-text-color
+  ) !important; /* Sobrescrever Bootstrap */
+  background-color: transparent;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1.2rem;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  margin-left: 15px; /* Espaço à esquerda do botão */
+}
+.youngcash-navbar .btn-entrar-custom:hover {
+  background-color: var(--navbar-button-hover-bg-color);
+  color: var(--navbar-button-hover-text-color) !important;
+  border-color: var(--navbar-button-hover-bg-color);
+}
+
+.youngcash-navbar .navbar-toggler {
+  border-color: rgba(44, 62, 80, 0.4); /* Cor da borda do ícone hamburguer */
+}
+.youngcash-navbar .navbar-toggler-icon {
+  /* Ícone hamburguer escuro para contraste com fundo amarelo */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(44, 62, 80)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Título e Subtítulo da Página de Planos (dentro do page-header amarelo) */
+.page-header h1 {
+  font-size: 2.8em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--text-color-dark);
+  text-shadow: none;
+}
+
+.page-header .subtitle {
+  font-size: 1.1em;
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+  color: var(--text-color-dark);
+}
+
+/* Seções */
+.plans-section,
+.how-to-subscribe,
+.faq-section {
+  padding: 40px 0;
+}
+
+.how-to-subscribe .container,
+.faq-section .container {
+  padding: 30px; /* Padding interno para estas seções */
+  background-color: var(
+    --white-color
+  ); /* Fundo branco para o container interno */
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 30px; /* Espaçamento entre seções */
+}
+
+h2 {
+  /* Estilo geral para H2 de seção */
+  font-size: 2em; /* 32px */
+  color: var(--text-color-dark);
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Grid de Planos */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.plan {
+  background: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-top: 5px solid transparent;
+}
+
+.plan:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.plan:nth-child(1) {
+  border-top-color: var(--text-color-dark);
+}
+.plan:nth-child(2) {
+  border-top-color: var(--text-color-dark);
+}
+.plan:nth-child(3) {
+  border-top-color: var(--text-color-dark);
+}
+
+.plan-header {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.plan-header h2 {
+  /* H2 dentro do plano */
+  font-size: 1.6em; /* 25.6px */
+  color: var(--text-color-dark); /* Mantido roxo para o título do plano */
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.plan-price {
+  font-size: 2.2em; /* 35.2px */
+  font-weight: 700;
+  color: var(--text-color-dark);
+  margin: 5px 0;
+}
+
+.plan-price span {
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--text-color-light);
+}
+.plan-price .price-detail {
+  font-size: 0.4em;
+  display: block;
+  font-weight: 300;
+}
+
+.plan-features {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  flex-grow: 1;
+}
+
+.plan-features li {
+  margin-bottom: 12px;
+  font-size: 0.95em; /* 15.2px */
+  color: var(--text-color-dark);
+  display: flex;
+  align-items: flex-start;
+}
+
+.plan-features li::before {
+  content: "\2713"; /* Checkmark (✓) */
+  color: var(--text-color-dark); /* Checkmark amarelo */
+  font-size: 1.1em;
+  margin-right: 10px;
+  min-width: 20px;
+}
+
+/* Plano em Destaque */
+.plan-featured {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--text-color-dark);
+  border-top-width: 5px; /* Mantém a borda do topo */
+  position: relative;
+}
+.plan-featured:hover {
+  transform: scale(1.08) translateY(-8px);
+}
+
+.featured-badge {
+  background-color: var(--accent-color);
+  color: var(--text-color-dark);
+  font-size: 0.8em;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 15px;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.plan-footer {
+  margin-top: auto;
+}
+
+/* Botão de Assinatura */
+.button-cta {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 14px 25px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1em; /* 16px */
+  font-weight: 500;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+.button-cta:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+.button-featured {
+  /* Botão do plano em destaque */
+  background-color: var(--accent-color);
+  color: var(--text-color-dark);
+}
+.button-featured:hover {
+  background-color: #e7a900; /* Dourado um pouco mais escuro */
+}
+
+/* Seção "Como Assinar" e "FAQ" */
+.how-to-subscribe h2,
+.faq-section h2 {
+  text-align: left;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.steps {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+.steps li {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.steps li span {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+}
+.faq-item p:first-child {
+  font-weight: 500;
+  color: var(--text-color-dark);
+  margin-bottom: 5px;
+}
+.faq-item p:last-child {
+  color: var(--text-color-light);
+  padding-left: 15px;
+  border-left: 3px solid var(--accent-color); /* Borda da resposta amarela */
+}
+
+/* Rodapé da Página */
+.page-footer-credits {
+  text-align: center;
+  margin-top: 50px;
+  padding: 25px 0;
+  background-color: var(--text-color-dark);
+  color: #bdc3c7;
+  font-size: 0.9em;
+}
+.page-footer-credits p {
+  margin: 0;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 992px) {
+  /* lg */
+  .plans-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .page-header h1 {
+    font-size: 2.4em;
+  }
+  .page-header .subtitle {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 768px) {
+  /* md */
+  body {
+    font-size: 15px;
+  }
+  .page-header {
+    padding-top: 15px;
+    padding-bottom: 40px;
+    border-bottom-left-radius: 40% 15px;
+    border-bottom-right-radius: 40% 15px;
+  }
+  .page-header h1 {
+    font-size: 2.2em;
+  }
+
+  .youngcash-navbar .navbar-nav {
+    margin-top: 10px; /* Espaço quando os links colapsam */
+    text-align: center; /* Centralizar links no mobile */
+  }
+  .youngcash-navbar .navbar-nav .nav-item {
+    margin-bottom: 8px; /* Espaçamento entre itens no menu colapsado */
+  }
+  .youngcash-navbar .btn-entrar-custom {
+    display: block;
+    width: fit-content; /* Botão não ocupa largura toda, mas centraliza */
+    margin: 15px auto 5px; /* Centralizar e ajustar margens */
+  }
+
+  .plan-featured {
+    transform: scale(1);
+  }
+  .plan-featured:hover {
+    transform: translateY(-8px);
+  }
+  .featured-badge {
+    font-size: 0.75em;
+    padding: 4px 12px;
+  }
+  .how-to-subscribe .container,
+  .faq-section .container {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* sm */
+  .youngcash-navbar {
+    padding-bottom: 1rem;
+  }
+  .page-header h1 {
+    font-size: 2em;
+  }
+  .page-header .subtitle {
+    font-size: 0.95em;
+  }
+  .plans-grid {
+    gap: 20px;
+  }
+  .plan {
+    padding: 20px;
+  }
+  /* Garante que o container da navbar não seja maior que o da página */
+  .page-header .container {
+    width: 100%; /* Ocupa toda a largura disponível no mobile, o padding cuidará das laterais */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.8em;
+  }
+}

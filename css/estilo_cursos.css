@@ -1,0 +1,601 @@
+:root {
+  --yc-primary: #394263; /* Azul escuro/acinzentado YoungCash */
+  --yc-secondary: #5e6b9d; /* Tom mais claro do primário YoungCash */
+  --yc-accent: #e7a900; /* Laranja/âmbar YoungCash (para o fundo do header) */
+  --yc-light: #f8f9fa; /* Cinza claro YoungCash */
+  --yc-dark: #212529; /* Preto suave YoungCash (para texto no header) */
+  --yc-white: #ffffff;
+  --yc-text-muted: #6c757d;
+
+  --yc-font-sans-serif: "Rubik", sans-serif; /* Fonte principal para texto comum */
+  --yc-font-header: "Roboto", sans-serif; /* Fonte para títulos e header navbar */
+
+  --yc-border-radius: 0.35rem;
+  --yc-border-radius-lg: 0.5rem;
+  --yc-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --yc-box-shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+
+  /* Variáveis RGB para uso em rgba() */
+  --yc-accent-rgb: 231, 169, 0; /* RGB de #e7a900 */
+  --yc-dark-rgb: 33, 37, 41; /* RGB de #212529 */
+  --yc-primary-rgb: 57, 66, 99; /* RGB de #394263 */
+  --yc-white-rgb: 255, 255, 255;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--yc-font-sans-serif);
+  background-color: var(--yc-light);
+  color: var(--yc-dark);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* === CABEÇALHO PADRÃO YOUNG CASH (para páginas logadas) === */
+.page-header-logado {
+  background: var(--yc-accent);
+  color: var(--yc-dark);
+  padding-top: 15px;
+  position: relative;
+  font-family: var(--yc-font-header);
+}
+
+.youngcash-navbar-logado {
+  background-color: transparent !important;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(var(--yc-dark-rgb), 0.15);
+}
+
+.youngcash-navbar-logado .navbar-brand {
+  color: var(--yc-dark) !important;
+  font-weight: 700;
+  font-size: 1.8em;
+}
+
+.youngcash-navbar-logado .navbar-brand:hover {
+  color: var(--yc-dark) !important;
+}
+
+.youngcash-navbar-logado .navbar-nav .nav-link {
+  color: var(--yc-dark) !important;
+  font-size: 1.05em;
+  font-weight: 500;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--yc-border-radius);
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.youngcash-navbar-logado .navbar-nav .nav-link:hover,
+.youngcash-navbar-logado .navbar-nav .nav-link.active {
+  color: var(--yc-dark) !important;
+  background-color: rgba(var(--yc-dark-rgb), 0.05);
+}
+
+.youngcash-navbar-logado .navbar-nav .nav-link.active {
+  font-weight: 700;
+  background-color: rgba(var(--yc-dark-rgb), 0.1);
+}
+
+.youngcash-navbar-logado .navbar-nav .nav-link .fa-user-circle {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+.youngcash-navbar-logado .dropdown-menu {
+  border-radius: var(--yc-border-radius);
+  box-shadow: var(--yc-box-shadow);
+  border: none;
+  margin-top: 0.5rem;
+}
+
+.youngcash-navbar-logado .dropdown-item {
+  color: var(--yc-dark);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+
+.youngcash-navbar-logado .dropdown-item:hover {
+  background-color: var(--yc-light);
+  color: var(--yc-dark);
+}
+
+.youngcash-navbar-logado .dropdown-toggle::after {
+  color: var(--yc-dark);
+}
+
+.youngcash-navbar-logado .navbar-toggler {
+  border-color: rgba(var(--yc-dark-rgb), 0.4);
+}
+
+.youngcash-navbar-logado .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(var(--yc-dark-rgb))' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Estilos Específicos para a Página de Cursos (estudo.php) */
+.page-content-cursos {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px 40px;
+}
+
+.section-title-cursos {
+  font-family: var(--yc-font-header, "Roboto", sans-serif);
+  font-size: 2em;
+  color: var(--yc-dark);
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--yc-accent);
+  display: inline-block;
+}
+
+.curso-container-scrollable {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 5px 25px 5px;
+  margin-bottom: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--yc-accent) var(--yc-light);
+}
+
+.curso-container-scrollable::-webkit-scrollbar {
+  height: 8px;
+}
+
+.curso-container-scrollable::-webkit-scrollbar-track {
+  background: var(--yc-light);
+  border-radius: 4px;
+}
+
+.curso-container-scrollable::-webkit-scrollbar-thumb {
+  background-color: var(--yc-accent);
+  border-radius: 4px;
+}
+
+.curso-card {
+  background-color: var(--yc-white, #ffffff);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--yc-border-radius, 0.35rem);
+  width: 250px;
+  padding: 15px;
+  flex-shrink: 0;
+  box-shadow: var(--yc-box-shadow, 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  color: var(--yc-dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.curso-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--yc-box-shadow-lg, 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1));
+  color: var(--yc-dark);
+}
+
+.curso-card img {
+  width: 100%;
+  border-radius: calc(var(--yc-border-radius, 0.35rem) - 4px);
+  margin-bottom: 12px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.curso-card h3 {
+  font-family: var(--yc-font-header, "Roboto", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--yc-dark);
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+  min-height: 2.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+}
+
+.curso-card .autor {
+  font-size: 0.85rem;
+  color: var(--yc-text-muted);
+  margin-bottom: 6px;
+}
+
+.curso-card .avaliacao {
+  font-size: 0.85rem;
+  color: #b4690e;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.curso-card .avaliacao .fa-star {
+  color: var(--yc-accent);
+}
+
+.curso-card .preco {
+  margin: 8px 0;
+}
+
+.curso-card .preco-atual {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--yc-dark);
+}
+
+.curso-card .preco-antigo {
+  text-decoration: line-through;
+  color: var(--yc-text-muted);
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+
+.curso-card .btn-tag {
+  background-color: var(--yc-accent);
+  color: var(--yc-dark);
+  border: none;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  border-radius: var(--yc-border-radius, 0.35rem);
+  font-weight: 500;
+  display: inline-block;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.carrinho-icon-container {
+  text-align: right;
+  padding: 0 0 20px 0;
+}
+
+.carrinho-icon-container .icon-carrinho {
+  font-size: 1.8em;
+  cursor: pointer;
+  color: var(--yc-dark);
+  transition: color 0.2s ease;
+}
+
+.carrinho-icon-container .icon-carrinho:hover {
+  color: var(--yc-accent);
+}
+
+/* === RODAPÉ PADRONIZADO === */
+.main-footer {
+  background-color: var(--yc-dark);
+  color: rgba(var(--yc-white-rgb), 0.7);
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  margin-top: 60px;
+  font-family: var(--yc-font-sans-serif);
+}
+
+.main-footer .navbar-nav .nav-link {
+  color: rgba(var(--yc-white-rgb), 0.7);
+  padding: 0.5rem 1rem 0.5rem 0;
+  font-size: 0.9em;
+  transition: color 0.2s ease;
+}
+
+.main-footer .navbar-nav .nav-link:hover {
+  color: var(--yc-white);
+}
+
+.main-footer .social-icon a {
+  font-size: 1.6rem;
+  color: rgba(var(--yc-white-rgb), 0.7);
+  margin-left: 1rem;
+  transition: color 0.2s ease;
+  display: inline-block;
+}
+
+.main-footer .social-icon a:first-child {
+  margin-left: 0;
+}
+
+.main-footer .social-icon a:hover {
+  color: var(--yc-accent);
+}
+
+.main-footer .copyright-section {
+  border-top: 1px solid rgba(var(--yc-white-rgb), 0.15);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.main-footer .copyright-section .text-muted.small {
+  color: rgba(var(--yc-white-rgb), 0.6) !important;
+  font-size: 0.85em;
+  margin: 0;
+}
+
+body {
+  background-color: var(--yc-light, #f8f9fa);
+  color: var(--yc-dark, #212529);
+  font-family: var(--yc-font-sans-serif, "Rubik", sans-serif);
+}
+
+.page-content-cursos {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px 40px;
+}
+
+.section-title-cursos {
+  font-family: var(--yc-font-header, "Roboto", sans-serif);
+  font-size: 2em;
+  color: var(--yc-primary);
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--yc-accent);
+  display: inline-block;
+}
+
+.curso-container-scrollable {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 5px 25px 5px;
+  margin-bottom: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--yc-accent) var(--yc-light);
+}
+
+.curso-container-scrollable::-webkit-scrollbar {
+  height: 8px;
+}
+
+.curso-container-scrollable::-webkit-scrollbar-track {
+  background: var(--yc-light);
+  border-radius: 4px;
+}
+
+.curso-container-scrollable::-webkit-scrollbar-thumb {
+  background-color: var(--yc-accent);
+  border-radius: 4px;
+}
+
+.curso-card {
+  background-color: var(--yc-white, #ffffff);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--yc-border-radius, 0.35rem);
+  width: 250px;
+  padding: 15px;
+  flex-shrink: 0;
+  box-shadow: var(--yc-box-shadow, 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  color: var(--yc-dark);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  /* Para indicar que é clicável */
+}
+
+.curso-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--yc-box-shadow-lg, 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1));
+  color: var(--yc-dark);
+}
+
+.curso-card img {
+  width: 100%;
+  border-radius: calc(var(--yc-border-radius, 0.35rem) - 4px);
+  margin-bottom: 12px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.curso-card h3 {
+  font-family: var(--yc-font-header, "Roboto", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--yc-primary);
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+  min-height: 2.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+}
+
+.curso-card .autor {
+  font-size: 0.85rem;
+  color: var(--yc-text-muted);
+  margin-bottom: 6px;
+}
+
+.curso-card .avaliacao {
+  font-size: 0.85rem;
+  color: #b4690e;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.curso-card .avaliacao .fa-star {
+  color: var(--yc-accent);
+}
+
+.curso-card .preco {
+  margin: 8px 0;
+}
+
+.curso-card .preco-atual {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--yc-primary);
+}
+
+.curso-card .preco-antigo {
+  text-decoration: line-through;
+  color: var(--yc-text-muted);
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+
+.curso-card .btn-tag {
+  background-color: var(--yc-accent);
+  color: var(--yc-dark);
+  border: none;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  border-radius: var(--yc-border-radius, 0.35rem);
+  font-weight: 500;
+  display: inline-block;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.carrinho-icon-container {
+  text-align: right;
+  padding: 0 0 20px 0;
+}
+
+.carrinho-icon-container .icon-carrinho {
+  font-size: 1.8em;
+  cursor: pointer;
+  color: var(--yc-dark);
+  transition: color 0.2s ease;
+}
+
+.carrinho-icon-container .icon-carrinho:hover {
+  color: var(--yc-accent);
+}
+
+/* Estilos para o Modal (adaptados do cursos.html e Bootstrap) */
+.modal-header-yc {
+  /* Para ter o fundo amarelo no header do modal */
+  background-color: var(--yc-accent);
+  color: var(--yc-dark);
+  border-bottom: 1px solid rgba(var(--yc-dark-rgb), 0.2);
+}
+
+.modal-header-yc .modal-title {
+  font-family: var(--yc-font-header);
+  font-weight: 600;
+}
+
+.modal-header-yc .close {
+  color: var(--yc-dark);
+  opacity: 0.7;
+  text-shadow: none;
+}
+
+.modal-header-yc .close:hover {
+  opacity: 1;
+}
+
+.modal-body-yc .curso-detalhe-sidebar {
+  background-color: var(--yc-light);
+  padding: 15px;
+  border-radius: var(--yc-border-radius);
+  border: 1px solid #eee;
+}
+
+.modal-body-yc .curso-detalhe-sidebar img.video-thumbnail {
+  width: 100%;
+  border-radius: var(--yc-border-radius);
+  margin-bottom: 15px;
+}
+
+.modal-body-yc .price-info .price {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--yc-primary);
+  margin-bottom: 5px;
+}
+
+.modal-body-yc .price-info .old-price {
+  text-decoration: line-through;
+  color: var(--yc-text-muted);
+  font-size: 0.9em;
+}
+
+.modal-body-yc .price-info .discount {
+  color: red;
+  font-size: 0.85em;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.modal-body-yc .btn-modal {
+  /* Estilo para botões dentro do modal */
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--yc-border-radius);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.modal-body-yc .btn-add-cart {
+  background-color: var(--yc-accent);
+  color: var(--yc-dark);
+}
+
+.modal-body-yc .btn-add-cart:hover {
+  background-color: #d49800;
+}
+
+/* Amarelo mais escuro */
+.modal-body-yc .btn-buy-now {
+  background-color: var(--yc-primary);
+  color: var(--yc-white);
+}
+
+.modal-body-yc .btn-buy-now:hover {
+  background-color: var(--yc-secondary);
+}
+
+.modal-body-yc .learn-box {
+  border: 1px solid var(--yc-accent);
+  background-color: #fffaf0;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: var(--yc-border-radius);
+}
+
+.modal-body-yc .learn-box h4 {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: var(--yc-primary);
+}
+
+.modal-body-yc .learn-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.modal-body-yc .learn-box ul li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.modal-body-yc .learn-box ul li i.fa-check {
+  color: green;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+.modal-lg {
+  max-width: 800px;
+}

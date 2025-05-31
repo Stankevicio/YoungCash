@@ -1,0 +1,30 @@
+# Arquivos de configuração sensíveis (se o seu config.php AINDA tiver senhas)
+# config.php 
+# Lembre-se: seu config.php atualizado usa getenv(), o que é bom.
+# Mas se você tem um config.php.example, adicione o config.php real aqui.
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de dependências (se você usar Composer para PHPMailer no futuro)
+/vendor/
+composer.lock
+
+# Arquivos de IDE/Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Outros (uploads, se você não quiser versioná-los)
+# /uploads/certificados/ 
+# (Cuidado: se os certificados são parte essencial e não muito grandes, pode querer versionar,
+# mas geralmente arquivos enviados por usuários não são versionados diretamente no código fonte)

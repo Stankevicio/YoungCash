@@ -1,0 +1,511 @@
+:root {
+  --primary-color: #5a16da;
+  /* Roxo principal (do tema index/planos) */
+  --secondary-color: #783add;
+  /* Roxo mais claro */
+  --accent-color: #e7a900;
+  /* Dourado para destaques (FUNDO DO HEADER) */
+  --text-color-dark: #2c3e50;
+  /* Azul escuro para texto */
+  --background-light: #f8f9fa;
+  --white-color: #ffffff;
+  --border-radius: 8px;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+  /* Variáveis YoungCash (yc-) para formulário e outros elementos */
+  --yc-primary: #394263;
+  --yc-secondary: #5e6b9d;
+  --yc-accent: var(--accent-color);
+  /* Reutiliza o accent-color */
+  --yc-light: var(--background-light);
+  --yc-dark: #212529;
+  --yc-white: var(--white-color);
+  --yc-text-muted: #6c757d;
+  --yc-font-sans-serif: "Rubik", sans-serif;
+  --yc-font-header: "Roboto", sans-serif;
+  --yc-border-radius: 0.35rem;
+  --yc-border-radius-lg: 0.5rem;
+  --yc-box-shadow: var(--box-shadow);
+  --yc-box-shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+
+  /* Navbar vars adaptadas do tema index/planos */
+  --navbar-text-color: var(--text-color-dark);
+  --navbar-text-hover-color: #000000;
+  --navbar-brand-color: var(--text-color-dark);
+  --navbar-button-border-color: var(--text-color-dark);
+  --navbar-button-text-color: var(--text-color-dark);
+  --navbar-button-hover-bg-color: var(--text-color-dark);
+  --navbar-button-hover-text-color: var(--white-color);
+}
+
+body {
+  font-family: var(--yc-font-sans-serif);
+  background-color: var(--yc-light);
+  color: var(--yc-dark);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* HEADER ESTILO planos.php / INDEX.PHP */
+.page-header {
+  background: var(--accent-color);
+  color: var(--text-color-dark);
+  padding: 20px 0 50px 0;
+  text-align: center;
+  border-bottom-left-radius: 50% 20px;
+  border-bottom-right-radius: 50% 20px;
+  margin-bottom: 40px;
+  position: relative;
+  font-family: var(--yc-font-header);
+}
+
+.page-header .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.youngcash-navbar {
+  background-color: transparent !important;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 25px;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(44, 62, 80, 0.15);
+  font-family: var(--yc-font-header);
+}
+
+.youngcash-navbar .navbar-brand {
+  color: var(--navbar-brand-color) !important;
+  font-weight: 700;
+  font-size: 1.8em;
+}
+
+.youngcash-navbar .navbar-brand:hover {
+  color: var(--navbar-text-hover-color) !important;
+}
+
+.youngcash-navbar .navbar-nav .nav-link {
+  color: var(--navbar-text-color) !important;
+  font-size: 1.05em;
+  font-weight: 500;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--border-radius);
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.youngcash-navbar .navbar-nav .nav-link:hover,
+.youngcash-navbar .navbar-nav .nav-link.active-cadastro {
+  /* Modificado para active-cadastro */
+  color: var(--navbar-text-hover-color) !important;
+  background-color: rgba(44, 62, 80, 0.05);
+}
+
+.youngcash-navbar .navbar-nav .nav-link.active-cadastro {
+  /* Modificado para active-cadastro */
+  font-weight: 700;
+  background-color: rgba(44, 62, 80, 0.1);
+}
+
+.youngcash-navbar .btn-entrar-custom {
+  border: 2px solid var(--navbar-button-border-color);
+  color: var(--navbar-button-text-color) !important;
+  background-color: transparent;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1.2rem;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  margin-left: 15px;
+}
+
+.youngcash-navbar .btn-entrar-custom:hover {
+  background-color: var(--navbar-button-hover-bg-color);
+  color: var(--navbar-button-hover-text-color) !important;
+  border-color: var(--navbar-button-hover-bg-color);
+}
+
+.youngcash-navbar .navbar-toggler {
+  border-color: rgba(44, 62, 80, 0.4);
+}
+
+.youngcash-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(44, 62, 80)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.page-header h1 {
+  font-size: 2.8em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--text-color-dark);
+  text-shadow: none;
+}
+
+.page-header .subtitle {
+  font-size: 1.1em;
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+  color: var(--text-color-dark);
+}
+
+/* Estilos do Formulário de Cadastro (baseados no seu original) */
+.registration-form-section {
+  padding: 40px 0;
+}
+
+.registration-card {
+  background: var(--yc-white);
+  border-radius: var(--yc-border-radius-lg);
+  box-shadow: var(--yc-box-shadow-lg);
+  overflow: hidden;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.registration-header {
+  background: var(--yc-primary);
+  color: var(--yc-white);
+  padding: 25px;
+  text-align: center;
+}
+
+.registration-header h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--yc-white);
+}
+
+.registration-header p {
+  font-size: 0.95em;
+  opacity: 0.8;
+  color: var(--yc-light);
+}
+
+.form-container-cadastro {
+  padding: 30px;
+}
+
+.user-type-selector {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.user-type-selector label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--yc-dark);
+  transition: all 0.3s;
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: var(--yc-border-radius);
+}
+
+.user-type-selector input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--yc-primary);
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  flex-shrink: 0;
+}
+
+.user-type-selector input[type="radio"]:checked {
+  background-color: var(--yc-primary);
+  border-color: var(--yc-primary);
+}
+
+.user-type-selector input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--yc-white);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.user-type-selector label:hover {
+  background-color: var(--yc-light);
+}
+
+.input-group-custom {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.input-group-custom .form-control {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid #ced4da;
+  border-radius: var(--yc-border-radius);
+  font-size: 1rem;
+  color: var(--yc-dark);
+  background-color: var(--yc-white);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input-group-custom .form-control:focus {
+  border-color: var(--yc-accent);
+  box-shadow: 0 0 0 0.2rem rgba(var(--yc-accent-rgb, 231, 169, 0), 0.25);
+  background-color: var(--yc-white);
+}
+
+.input-group-custom i.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--yc-text-muted);
+  transition: color 0.15s ease-in-out;
+}
+
+.input-group-custom .form-control:focus + i.input-icon {
+  color: var(--yc-accent);
+}
+
+.input-group-custom .floating-label {
+  position: absolute;
+  left: 45px;
+  top: 13px;
+  color: var(--yc-text-muted);
+  font-size: 1rem;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  background-color: var(--yc-white);
+  padding: 0 5px;
+}
+
+.input-group-custom .form-control:focus ~ .floating-label,
+.input-group-custom .form-control.has-value ~ .floating-label,
+.input-group-custom .form-control:not(:placeholder-shown) ~ .floating-label {
+  top: -10px;
+  left: 40px;
+  font-size: 0.8rem;
+  color: var(--yc-primary);
+}
+
+.input-group-custom input[type="date"] ~ .floating-label {
+  top: -10px;
+  left: 40px;
+  font-size: 0.8rem;
+  color: var(--yc-primary);
+}
+
+.certificado-field-custom {
+  display: none;
+  margin-top: 20px;
+  background: var(--yc-light);
+  padding: 20px;
+  border-radius: var(--yc-border-radius);
+  border: 2px dashed var(--yc-secondary);
+  text-align: center;
+}
+
+.certificado-field-custom.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+.certificado-field-custom .cert-label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: var(--yc-primary);
+  font-size: 1.1em;
+}
+
+.file-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input-wrapper input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-input-styled-label {
+  display: inline-block;
+  padding: 10px 25px;
+  background: var(--yc-accent);
+  color: var(--yc-dark);
+  border-radius: var(--yc-border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-input-styled-label:hover {
+  background: #d49800;
+}
+
+.file-name-display {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: var(--yc-text-muted);
+}
+
+.btn-submit-custom {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--yc-border-radius);
+  background: var(--yc-primary);
+  color: var(--yc-white);
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px;
+  box-shadow: var(--yc-box-shadow);
+}
+
+.btn-submit-custom:hover {
+  background: var(--yc-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--yc-box-shadow-lg);
+}
+
+.btn-submit-custom i {
+  margin-right: 8px;
+}
+
+.login-link-custom {
+  text-align: center;
+  margin-top: 25px;
+  color: var(--yc-dark);
+  font-size: 0.95em;
+}
+
+.login-link-custom a {
+  color: var(--yc-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link-custom a:hover {
+  text-decoration: underline;
+  color: #d49800;
+}
+
+.alert {
+  border-radius: var(--yc-border-radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
+
+.alert-link {
+  font-weight: bold;
+  color: inherit;
+}
+
+/* Media Queries do seu cadastro.php original */
+@media (max-width: 768px) {
+  .page-header {
+    padding-top: 15px;
+    padding-bottom: 40px;
+    border-bottom-left-radius: 40% 15px;
+    border-bottom-right-radius: 40% 15px;
+  }
+
+  .page-header h1 {
+    font-size: 2.2em;
+  }
+
+  .youngcash-navbar .navbar-nav {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .youngcash-navbar .navbar-nav .nav-item {
+    margin-bottom: 8px;
+  }
+
+  .youngcash-navbar .btn-entrar-custom {
+    display: block;
+    width: fit-content;
+    margin: 15px auto 5px;
+  }
+
+  .registration-header h2 {
+    font-size: 1.6em;
+  }
+
+  .form-container-cadastro {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .youngcash-navbar {
+    padding-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 2em;
+  }
+
+  .page-header .subtitle {
+    font-size: 0.95em;
+  }
+
+  .user-type-selector {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .user-type-selector label {
+    justify-content: center;
+  }
+
+  .registration-card {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
