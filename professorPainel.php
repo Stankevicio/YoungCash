@@ -95,7 +95,7 @@ $stmt_cursos = null;
     <title>Dashboard Professor | YoungCash</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="css/estilo-homeProfessor.css">
+    <link rel="stylesheet" href="css/estilo_alunoPainel.css">
 </head>
 <body>
     <div class="dashboard-container">
