@@ -1,0 +1,313 @@
+:root {
+  --primary: #ffd700;
+  /* Amarelo Principal - usado na sidebar e elementos */
+  --secondary: #ffa500;
+  --dark: #1a1a1a;
+  /* Preto Profundo - usado na sidebar */
+  --light: #ffffff;
+  /* Branco */
+  --gray: #f5f5f5;
+  /* Cinza Claro para fundos de elementos */
+  --dark-gray: #333333;
+  /* Cinza Escuro para texto */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: var(--dark-gray);
+  /* Ajustado para dark-gray */
+  line-height: 1.6;
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--dark);
+  color: var(--light);
+  padding: 20px 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.profile {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+  /* Usando a classe avatar que você definiu */
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 auto 15px;
+}
+
+.profile-name {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+
+.profile-role {
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+.nav-menu {
+  margin-top: 20px;
+  flex-grow: 1;
+}
+
+.nav-item {
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-left-color 0.3s;
+  display: flex;
+  align-items: center;
+  color: #ddd;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+  background: rgba(255, 215, 0, 0.05);
+  color: var(--primary);
+  border-left-color: var(--primary);
+}
+
+.nav-item.active {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--primary);
+  font-weight: bold;
+  border-left-color: var(--primary);
+}
+
+.nav-item i {
+  margin-right: 12px;
+  width: 20px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.nav-item span {
+  flex-grow: 1;
+}
+
+/* Para <a> dentro de .nav-item (se você usar essa estrutura) */
+.nav-item a,
+.nav-item a:visited {
+  color: inherit;
+  text-decoration: none;
+  display: contents;
+}
+
+.nav-menu .nav-item:last-child {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-content {
+  padding: 30px;
+  background-color: var(--gray);
+  overflow-y: auto;
+}
+
+.main-content .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.main-content .header h1 {
+  color: var(--dark-gray);
+  font-size: 1.8em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+#calendar {
+  background: var(--light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1050;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: var(--light);
+  padding: 25px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin: 0;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+
+.close-modal:hover {
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #444;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.95em;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--dark);
+}
+
+.btn-primary:hover {
+  background: #e6c200;
+  /* Amarelo mais escuro */
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+/* Estilo para dias no calendário que têm notas */
+.fc-daygrid-day.has-note-dot .fc-daygrid-day-number::after {
+  content: "●";
+  color: var(--primary);
+  /* Cor do indicador */
+  font-size: 10px;
+  /* Tamanho do indicador */
+  position: absolute;
+  bottom: 2px;
+  /* Ajuste a posição conforme necessário */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fc-event.has-note {
+  /* Estilo para o evento de nota, se você criar eventos visíveis */
+  background-color: var(--secondary) !important;
+  /* Laranja para notas */
+  border-color: var(--secondary) !important;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+    /* Esconde a sidebar em mobile por padrão, precisa de um botão para mostrar */
+  }
+
+  /* Se quiser mostrar a sidebar no mobile, ajuste aqui, ex: como no alunoAgenda.php */
+  .main-content {
+    padding: 20px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+}

@@ -111,10 +111,6 @@ $stmt_cursos = null;
                     <i class="fas fa-chalkboard-teacher"></i>
                     <span>Monitoramento</span>
                 </a>
-                <a href="cursosProfessor.php" class="nav-item">
-                    <i class="fas fa-book"></i>
-                    <span>Meus Cursos</span>
-                </a>
                 <a href="professorCalendario.php" class="nav-item">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Agenda</span>
