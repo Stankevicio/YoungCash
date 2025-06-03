@@ -556,3 +556,120 @@ section {
   font-size: 24px;
   cursor: pointer;
 }
+
+.yc-feedback-popup-overlay {
+  display: none; /* Começa oculto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65); /* Fundo escuro semi-transparente */
+  z-index: 1050; /* Acima de outros conteúdos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInOverlayFeedback 0.3s ease-out forwards; /* Garante que o estado final da animação persista */
+}
+
+@keyframes fadeInOverlayFeedback {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.yc-feedback-popup-content {
+  background: var(--yc-white, #fff); /* Usa variável do tema */
+  padding: 25px 30px;
+  border-radius: var(--yc-border-radius-lg, 0.5rem); /* Usa variável do tema */
+  box-shadow: var(
+    --yc-box-shadow-lg,
+    0 0.5rem 1.5rem rgba(0, 0, 0, 0.2)
+  ); /* Usa variável do tema */
+  text-align: center;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  animation: popupZoomInFeedback 0.3s ease-out forwards; /* Garante que o estado final da animação persista */
+}
+@keyframes popupZoomInFeedback {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.yc-feedback-popup-content h3 {
+  font-family: var(
+    --yc-font-header,
+    "Roboto",
+    sans-serif
+  ); /* Usa variável do tema */
+  color: var(--yc-primary);
+  font-size: 1.6em;
+  margin-top: 0;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.yc-feedback-popup-content h3 i {
+  font-size: 1.1em;
+}
+/* Cores específicas para ícones de feedback */
+.yc-feedback-popup-content h3 .fa-check-circle {
+  color: #28a745;
+}
+.yc-feedback-popup-content h3 .fa-times-circle {
+  color: #dc3545;
+}
+.yc-feedback-popup-content h3 .fa-exclamation-triangle {
+  color: #ffc107;
+}
+
+.yc-feedback-popup-content p {
+  font-size: 1em;
+  color: var(--yc-text-muted); /* Usa variável do tema */
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.yc-feedback-popup-content .btn-popup-ok {
+  background-color: var(--yc-primary); /* Usa variável do tema */
+  color: var(--yc-white); /* Usa variável do tema */
+  padding: 10px 30px;
+  border: none;
+  border-radius: var(--yc-border-radius); /* Usa variável do tema */
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1em;
+  font-family: var(--yc-font-sans-serif); /* Usa variável do tema */
+  transition: background-color 0.2s ease;
+}
+.yc-feedback-popup-content .btn-popup-ok:hover {
+  background-color: var(--yc-secondary); /* Usa variável do tema */
+}
+
+.yc-feedback-popup-content .yc-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem; /* Ajustado */
+  color: var(--yc-text-muted);
+  cursor: pointer;
+  line-height: 1;
+  background: none;
+  border: none;
+  padding: 0; /* Para melhor alinhamento */
+}
+.yc-feedback-popup-content .yc-popup-close:hover {
+  color: var(--yc-dark); /* Usa variável do tema */
+}

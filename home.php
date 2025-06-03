@@ -389,65 +389,50 @@ $logado = $_SESSION['email'];
 
    </section>
 
-   <!-- reviews section ends -->
-
-   <!-- contact section starts  -->
-
    <section class="contact" id="contact">
-
-      <h1 class="heading"><span>Informe seus dados de contato para receber por email noticias do mundo financeiro.</span> </h1>
-
+      <h1 class="heading"><span>Informe seus dados de contato para receber por email noticias do mundo financeiro.</span></h1>
       <div class="row">
-
          <div class="image">
             <img src="img/contact-img.svg" alt="">
          </div>
-
-         <form action="enviar_email.php" method="post">
+         <form action="enviar_email.php" method="post" id="formContatoNewsletter">
             <span>nome</span>
-            <input type="text" required placeholder="" maxlength="50" name="nome" class="box">
+            <input type="text" required placeholder="Seu nome completo" maxlength="50" name="nome" class="box">
             <span>email</span>
-            <input type="email" required placeholder="" maxlength="50" name="email" id="email" class="box">
+            <input type="email" required placeholder="seuemail@exemplo.com" maxlength="50" name="email" class="box">
             <span>telefone</span>
-            <input type="number" required placeholder="" max="99999999999" min="0" name="telefone" class="box"
-               onkeypress="if(this.value.length == 10) return false;">
+            <input type="number" placeholder="Seu telefone (opcional)" max="9999999999999" min="0" name="telefone" class="box" onkeypress="if(this.value.length == 11) return false;">
             <span>profissão</span>
-            <select name="couses" class="box" required>
-               <option value="" disabled selected>Selecione a opção --</option>
-               <option value="web developement">web developement</option>
-               <option value="science and biology">science and biology</option>
-               <option value="engineering">engineering</option>
-               <option value="digital marketing">digital marketing</option>
-               <option value="graphic design">graphic design</option>
-               <option value="teaching">teaching</option>
-               <option value="social studies">social studies</option>
-               <option value="data analysis">data analysis</option>
-               <option value="artificial intelligence">artificial intelligence</option>
+            <select name="profissao" class="box">
+               <option value="" disabled selected>Selecione sua profissão (opcional)</option>
+               <option value="estudante">Estudante</option>
+               <option value="desenvolvedor">Desenvolvedor Web</option>
+               <option value="ciencia_biologia">Ciência e Biologia</option>
+               <option value="engenharia">Engenharia</option>
+               <option value="marketing_digital">Marketing Digital</option>
+               <option value="design_grafico">Design Gráfico</option>
+               <option value="ensino">Ensino</option>
+               <option value="estudos_sociais">Estudos Sociais</option>
+               <option value="analise_dados">Análise de Dados</option>
+               <option value="ia">Inteligência Artificial</option>
+               <option value="outra">Outra</option>
             </select>
             <span>Selecione o seu Gênero:</span>
             <div class="radio">
                <input type="radio" name="gender" value="male" id="male">
-               <label for="male" style="margin-right: 5px;">Masculino</label>
+               <label for="male" style="margin-right: 5px; color: var(--light-bg);">Masculino</label>
                <input type="radio" name="gender" value="female" id="female">
-               <label for="female" style="margin-right: 20px;">Feminino</label>
+               <label for="female" style="margin-right: 20px; color: var(--light-bg);">Feminino</label>
                <input type="radio" name="gender" value="other" id="other">
-               <label for="other">Outro</label>
+               <label for="other" style="color: var(--light-bg);">Outro</label>
             </div>
-            <input type="submit" value="Enviar" class="btn" name="send">
+            <input type="submit" value="Quero Receber!" class="btn" name="send">
          </form>
-
       </div>
-
    </section>
 
-   <!-- contact section ends -->
-
-   <!-- footer section starts  -->
-
    <footer class="footer">
-
       <section>
-
          <div class="share">
             <a href="#" class="fab fa-facebook-f"></a>
             <a href="#" class="fab fa-twitter"></a>
@@ -455,15 +440,91 @@ $logado = $_SESSION['email'];
             <a href="#" class="fab fa-instagram"></a>
             <a href="#" class="fab fa-youtube"></a>
          </div>
-
-         <div class="credit" style="color: #e7a900">&copy; <span id="currentYear"></span> YoungCash. Todos os direitos reservados.</div>
-
+         <div class="credit" style="color: var(--green);">&copy; <span id="currentYear"></span> YoungCash. Todos os direitos reservados.</div>
       </section>
-
    </footer>
+
+   <div id="newsletterFeedbackPopup" class="yc-feedback-popup-overlay" style="display:none;">
+      <div class="yc-feedback-popup-content">
+         <button type="button" class="yc-popup-close" onclick="closeNewsletterFeedbackPopup()" aria-label="Fechar">&times;</button>
+         <h3 id="newsletterPopupTitle"><i class="fas"></i> <span></span></h3>
+         <p id="newsletterPopupMessage"></p>
+         <button onclick="closeNewsletterFeedbackPopup()" class="btn-popup-ok">OK</button>
+      </div>
+   </div>
 
    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
    <script src="js/script-home.js"></script>
+
+   <script>
+      // Script para o formulário de newsletter/contato com popup
+      const newsletterForm = document.getElementById('formContatoNewsletter');
+      const newsletterFeedbackPopup = document.getElementById('newsletterFeedbackPopup');
+      const newsletterPopupTitleEl = document.getElementById('newsletterPopupTitle');
+      const newsletterPopupMessageEl = document.getElementById('newsletterPopupMessage');
+      const newsletterPopupOverlay = document.querySelector('#newsletterFeedbackPopup.yc-feedback-popup-overlay');
+
+      if (newsletterForm) {
+         newsletterForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(newsletterForm);
+            const submitButton = newsletterForm.querySelector('input[type="submit"]');
+            const originalButtonText = submitButton.value;
+            submitButton.value = 'Enviando...';
+            submitButton.disabled = true;
+
+            fetch('enviar_email.php', {
+                  method: 'POST',
+                  body: formData
+               })
+               .then(response => {
+                  if (!response.ok) { // Verifica se a resposta HTTP foi bem-sucedida
+                     throw new Error(`Erro de rede: ${response.status} ${response.statusText}`);
+                  }
+                  return response.json();
+               })
+               .then(data => {
+                  if (data.status === 'success') {
+                     if (newsletterPopupTitleEl) newsletterPopupTitleEl.innerHTML = '<i class="fas fa-check-circle" style="color: green;"></i> Sucesso!';
+                     if (newsletterPopupMessageEl) newsletterPopupMessageEl.textContent = data.message;
+                     newsletterForm.reset();
+                  } else {
+                     if (newsletterPopupTitleEl) newsletterPopupTitleEl.innerHTML = '<i class="fas fa-times-circle" style="color: red;"></i> Erro!';
+                     if (newsletterPopupMessageEl) newsletterPopupMessageEl.textContent = data.message || 'Ocorreu um erro ao processar sua solicitação.';
+                  }
+                  if (newsletterFeedbackPopup) newsletterFeedbackPopup.style.display = 'flex';
+               })
+               .catch(error => {
+                  console.error('Erro na requisição AJAX:', error);
+                  if (newsletterPopupTitleEl) newsletterPopupTitleEl.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: orange;"></i> Erro de Conexão!';
+                  if (newsletterPopupMessageEl) newsletterPopupMessageEl.textContent = 'Não foi possível conectar ao servidor. Tente novamente mais tarde.';
+                  if (newsletterFeedbackPopup) newsletterFeedbackPopup.style.display = 'flex';
+               })
+               .finally(() => {
+                  submitButton.value = originalButtonText;
+                  submitButton.disabled = false;
+               });
+         });
+      }
+
+      function closeNewsletterFeedbackPopup() {
+         if (newsletterFeedbackPopup) newsletterFeedbackPopup.style.display = 'none';
+      }
+
+      if (newsletterPopupOverlay) {
+         newsletterPopupOverlay.addEventListener('click', function(event) {
+            if (event.target === newsletterPopupOverlay) {
+               closeNewsletterFeedbackPopup();
+            }
+         });
+      }
+
+      // Manter o script do currentYear se ele não estiver no script_home.js
+      if (document.getElementById('currentYear')) {
+         document.getElementById('currentYear').textContent = new Date().getFullYear();
+      }
+   </script>
 
 </body>
 
