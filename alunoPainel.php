@@ -20,7 +20,7 @@ if (file_exists('config.php')) {
 }
 
 if (!isset($conn) || !($conn instanceof PDO)) {
-    die("Erro crítico: Conexão com o banco de dados não estabelecida ou inválida via config.php. Verifique o config.php.");
+    die("Erro crítico: Conexão com o banco de dados não estabelecida ou inválida via config.php.");
 }
 
 $aluno_id = $_SESSION['usuario_id'];
@@ -32,6 +32,7 @@ $stats = [
     'media_progresso' => 0.0
 ];
 $iniciais = '';
+$pagina_erro_mensagem = '';
 
 try {
     // Buscar dados do aluno
@@ -44,23 +45,24 @@ try {
     $stmt_aluno->bindParam(':tipo_aluno', $tipo_aluno_val, PDO::PARAM_STR);
     $stmt_aluno->execute();
     $aluno = $stmt_aluno->fetch(PDO::FETCH_ASSOC);
+    $stmt_aluno = null;
 
     if (!$aluno) {
         error_log("Aluno não encontrado com ID: " . $aluno_id . " ou tipo não é estudante para alunoPainel.php.");
         $_SESSION['error_message'] = "Erro: Aluno não encontrado ou acesso inválido.";
-        header("Location: home.php"); // Ou uma página de erro apropriada
+        header("Location: home.php");
         exit();
     }
-    $stmt_aluno = null;
 
-    // Extrair iniciais para o avatar
     if (isset($aluno['nome'])) {
-        $nomes = explode(' ', $aluno['nome']);
-        if (count($nomes) > 0) {
+        $nomes = explode(' ', trim($aluno['nome']));
+        if (count($nomes) > 0 && !empty($nomes[0])) {
             $iniciais = strtoupper(substr($nomes[0], 0, 1));
-            if (count($nomes) > 1) {
+            if (count($nomes) > 1 && !empty(end($nomes))) {
                 $iniciais .= strtoupper(substr(end($nomes), 0, 1));
             }
+        } else {
+            $iniciais = "A";
         }
     }
 
@@ -105,11 +107,63 @@ try {
         $stats = $stats_result;
     }
     $stmt_stats = null;
+
+    // --- INÍCIO: DADOS DE EXEMPLO SE O ALUNO NÃO TIVER CURSOS (para visualização) ---
+    if (empty($cursos_do_aluno_array)) {
+        $cursos_do_aluno_array = [
+            [
+                'id' => 101,
+                'nome' => 'Python para Data Science e Machine Learning COMPLETO',
+                'descricao' => 'Organize suas finanças pessoais e comece a poupar.',
+                'categoria' => 'Finanças Pessoais',
+                'total_aulas' => 20,
+                'professor_nome' => 'Prof. John',
+                'data_inscricao' => date("Y-m-d H:i:s", strtotime("-5 days")),
+                'progresso' => 75,
+                'aulas_concluidas' => 15
+            ],
+            [
+                'id' => 102,
+                'nome' => 'Marketing Digital Completo Para Iniciantes 2024',
+                'descricao' => 'Descubra como investir de forma inteligente.',
+                'categoria' => 'Investimentos',
+                'total_aulas' => 15,
+                'professor_nome' => 'Profa. Demonstrativa',
+                'data_inscricao' => date("Y-m-d H:i:s", strtotime("-2 days")),
+                'progresso' => 33,
+                'aulas_concluidas' => 5
+            ],
+            [
+                'id' => 103,
+                'nome' => 'Finanças Pessoais e Investimentos: Guia Completo',
+                'descricao' => 'Garanta um futuro financeiro tranquilo.',
+                'categoria' => 'Planejamento',
+                'total_aulas' => 12,
+                'professor_nome' => 'Prof. Demonstrativo',
+                'data_inscricao' => date("Y-m-d H:i:s", strtotime("-10 days")),
+                'progresso' => 10,
+                'aulas_concluidas' => 1
+            ]
+        ];
+        // Se os cursos de exemplo foram adicionados, recalcular as estatísticas para os cards de resumo
+        if (empty($stats['total_cursos']) && !empty($cursos_do_aluno_array)) {
+            $stats['total_cursos'] = count($cursos_do_aluno_array);
+            $total_aulas_concluidas_exemplo = 0;
+            $soma_progresso_exemplo = 0;
+            foreach ($cursos_do_aluno_array as $ex_curso) {
+                $total_aulas_concluidas_exemplo += (int)($ex_curso['aulas_concluidas'] ?? 0);
+                $soma_progresso_exemplo += (float)($ex_curso['progresso'] ?? 0);
+            }
+            $stats['total_aulas_concluidas'] = $total_aulas_concluidas_exemplo;
+            $stats['media_progresso'] = $stats['total_cursos'] > 0 ? round($soma_progresso_exemplo / $stats['total_cursos'], 1) : 0.0;
+        }
+    }
+    // --- FIM: DADOS DE EXEMPLO ---
+
 } catch (PDOException $e) {
     error_log("Erro PDO em alunoPainel.php: " . $e->getMessage());
     $pagina_erro_mensagem = "Ocorreu um erro ao buscar os dados da página. Por favor, tente novamente mais tarde.";
-    // Para depuração, você pode descomentar a linha abaixo:
-    // die($pagina_erro_mensagem . " Detalhe (dev): " . htmlspecialchars($e->getMessage()));
+    // Para depuração: $pagina_erro_mensagem .= " Detalhe (dev): " . htmlspecialchars($e->getMessage());
 }
 
 $total_cursos = (int)($stats['total_cursos'] ?? 0);
@@ -123,7 +177,6 @@ $media_progresso = round(floatval($stats['media_progresso'] ?? 0), 1);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Aluno | YoungCash</title>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/estilo_alunoPainel.css">
 </head>
@@ -134,7 +187,7 @@ $media_progresso = round(floatval($stats['media_progresso'] ?? 0), 1);
             <div class="profile">
                 <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($iniciais ?: 'A'); ?>&background=FFD700&color=1A1A1A&bold=true&size=80" alt="Foto do Aluno" class="profile-img">
                 <h3><?php echo htmlspecialchars($aluno['nome'] ?? 'Aluno'); ?></h3>
-                <p>Estudante</p>
+                <p><?php echo htmlspecialchars($aluno['tipo'] ?? 'Estudante'); ?></p>
             </div>
             <nav class="nav-menu">
                 <a href="home.php" class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : ''); ?>">
@@ -143,13 +196,16 @@ $media_progresso = round(floatval($stats['media_progresso'] ?? 0), 1);
                 <a href="alunoPainel.php" class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'alunoPainel.php' ? 'active' : ''); ?>">
                     <i class="fas fa-tachometer-alt"></i> <span>Meu Painel</span>
                 </a>
+                <a href="cursos.php" class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'cursos.php' ? 'active' : ''); ?>">
+                    <i class="fas fa-book-open-reader"></i> <span>Explorar Cursos</span>
+                </a>
                 <a href="alunoAgenda.php" class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'alunoAgenda.php' ? 'active' : ''); ?>">
                     <i class="fas fa-calendar-alt"></i> <span>Agenda</span>
                 </a>
-                <a href="configuracoes.php" class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'settings.php' ? 'active' : ''); ?>">
+                <a href="settings.php" class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'settings.php' ? 'active' : ''); ?>">
                     <i class="fas fa-cog"></i> <span>Configurações</span>
                 </a>
-                <a href="sair.php" class="nav-item">
+                <a href="sair.php" class="nav-item" id="link-sair-painel">
                     <i class="fas fa-sign-out-alt"></i> <span>Sair</span>
                 </a>
             </nav>
@@ -160,8 +216,10 @@ $media_progresso = round(floatval($stats['media_progresso'] ?? 0), 1);
                 <h1><i class="fas fa-tachometer-alt"></i> Painel do Aluno</h1>
             </header>
 
-            <?php if (isset($pagina_erro_mensagem)): ?>
-                <p style="color:red; background:pink; padding:10px;"><?php echo htmlspecialchars($pagina_erro_mensagem); ?></p>
+            <?php if (!empty($pagina_erro_mensagem)): ?>
+                <div class="alert alert-danger" role="alert" style="background-color: #f8d7da; color: #721c24; padding: 10px; border: 1px solid #f5c6cb; border-radius: 5px; margin-bottom: 20px;">
+                    <?php echo htmlspecialchars($pagina_erro_mensagem); ?>
+                </div>
             <?php endif; ?>
 
             <section class="cards-container">
@@ -217,13 +275,14 @@ $media_progresso = round(floatval($stats['media_progresso'] ?? 0), 1);
                             $isNew = $data_inscricao_curso ? (strtotime($data_inscricao_curso) > strtotime('-7 days')) : false;
                             $progresso = round(floatval($curso['progresso'] ?? 0), 1);
                             ?>
-                            <div class="curso-card">
+                            <a href="aula.php?curso_id=<?php echo htmlspecialchars($curso['id']); ?>&aula=<?php echo (int)($curso['aulas_concluidas'] ?? 0) + 1; ?>" class="curso-card" title="Acessar curso: <?php echo htmlspecialchars($curso['nome'] ?? ($curso['nome_curso'] ?? '')); ?>">
                                 <?php if ($isNew): ?><span class="badge badge-new">Novo</span><?php endif; ?>
-                                <div class="curso-imagem"><i class="fas fa-book-open"></i></div>
+                                <div class="curso-imagem">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
                                 <div class="curso-content">
                                     <span class="curso-categoria"><?php echo htmlspecialchars($curso['categoria'] ?? 'Indefinida'); ?></span>
                                     <h3 class="curso-title"><?php echo htmlspecialchars($curso['nome'] ?? ($curso['nome_curso'] ?? 'Nome do Curso')); ?></h3>
-                                    <p class="curso-desc"><?php echo htmlspecialchars($curso['descricao'] ?? 'Sem descrição.'); ?></p>
                                     <p class="curso-professor"><strong>Professor:</strong> <?php echo htmlspecialchars($curso['professor_nome'] ?? 'N/A'); ?></p>
                                     <div class="progress-container">
                                         <div class="progress-bar">
@@ -233,14 +292,10 @@ $media_progresso = round(floatval($stats['media_progresso'] ?? 0), 1);
                                     </div>
                                     <div class="curso-stats">
                                         <div class="curso-stat"><i class="fas fa-play-circle"></i> <?php echo (int)($curso['aulas_concluidas'] ?? 0); ?>/<?php echo (int)($curso['total_aulas'] ?? 0); ?> aulas</div>
-                                        <div class="curso-stat"><i class="fas fa-calendar-alt"></i> <?php echo $data_inscricao_curso ? date('d/m/Y', strtotime($data_inscricao_curso)) : 'N/A'; ?></div>
-                                    </div>
-                                    <div class="curso-actions">
-                                        <button class="btn btn-secondary" onclick="window.location.href='detalhes_curso.php?id=<?php echo $curso['id']; ?>'"><i class="fas fa-info-circle"></i> Detalhes</button>
-                                        <button class="btn btn-primary" onclick="window.location.href='aula.php?curso_id=<?php echo $curso['id']; ?>&aula=<?php echo (int)($curso['aulas_concluidas'] ?? 0) + 1; ?>'"><i class="fas fa-play"></i> <?php echo ((int)($curso['aulas_concluidas'] ?? 0) > 0 ? 'Continuar' : 'Iniciar Curso'); ?></button>
+                                        <div class="curso-stat"><i class="fas fa-calendar-alt"></i> Inscrito em: <?php echo $data_inscricao_curso ? date('d/m/Y', strtotime($data_inscricao_curso)) : 'N/A'; ?></div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="empty-state">
@@ -258,6 +313,16 @@ $media_progresso = round(floatval($stats['media_progresso'] ?? 0), 1);
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Script para limpar carrinho no logout
+        const linkSairPainel = document.getElementById('link-sair-painel');
+        if (linkSairPainel) {
+            linkSairPainel.addEventListener('click', function() {
+                localStorage.removeItem('cursosNoCarrinho'); // Use a chave correta do seu carrinho
+                console.log('Carrinho do localStorage limpo ao sair do painel.');
+            });
+        }
+    </script>
 </body>
 
 </html>
