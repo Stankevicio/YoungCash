@@ -41,8 +41,8 @@ $logado = $_SESSION['email'];
             <a href="cursos.php">Aprenda</a>
             <a href="alunoPainel.php">Painel</a>
             <a href="invest.php">Investimento</a>
-            <a href="#reviews">opniões</a>
-            <a href="#contact">contato</a>
+            <a href="#reviews">Opiniões</a>
+            <a href="#contact">Contato</a>
             <a href="perfil.php">Meu Perfil</a>
          </nav>
 
@@ -57,7 +57,7 @@ $logado = $_SESSION['email'];
 
          <div class="content">
             <h3>Young <span>Cash</span></h3>
-            <a href="#contact" class="btn">contato</a>
+            <a href="#contact" class="btn">CONTATO</a>
          </div>
 
          <div class="image">
@@ -117,10 +117,10 @@ $logado = $_SESSION['email'];
          </div>
 
          <div class="content">
-            <h3>Porque nos-escolher??</h3>
+            <h3>PORQUE NOS ESCOLHER?</h3>
             <p>O YoungCash pode ser uma boa escolha para quem busca aprendizado online por ser uma plataforma com grande variedade de cursos na área financeira, desde temas básicos a especializados, e por oferecer flexibilidade de aprendizado, com cursos gratuitos e pagos.
             </p>
-            <a href="#contact" class="btn">contato</a>
+            <a href="#contact" class="btn">CONTATO</a>
          </div>
 
       </div>
@@ -267,7 +267,7 @@ $logado = $_SESSION['email'];
 
    <section class="reviews" id="reviews">
 
-      <h1 class="heading"> Opnião de <span>estudantes</span></h1>
+      <h1 class="heading"> Opiniões de <span>estudantes</span></h1>
 
       <div class="swiper reviews-slider">
 
@@ -396,13 +396,13 @@ $logado = $_SESSION['email'];
             <img src="img/contact-img.svg" alt="">
          </div>
          <form action="enviar_email.php" method="post" id="formContatoNewsletter">
-            <span>nome</span>
+            <span>Nome Completo</span>
             <input type="text" required placeholder="Seu nome completo" maxlength="50" name="nome" class="box">
-            <span>email</span>
+            <span>E-mail</span>
             <input type="email" required placeholder="seuemail@exemplo.com" maxlength="50" name="email" class="box">
-            <span>telefone</span>
+            <span>Telefone</span>
             <input type="number" placeholder="Seu telefone (opcional)" max="9999999999999" min="0" name="telefone" class="box" onkeypress="if(this.value.length == 11) return false;">
-            <span>profissão</span>
+            <span>Profissão</span>
             <select name="profissao" class="box">
                <option value="" disabled selected>Selecione sua profissão (opcional)</option>
                <option value="estudante">Estudante</option>
