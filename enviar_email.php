@@ -81,7 +81,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <p>O Banco Central Europeu anunciou um aumento em sua taxa de juros...</p>
                         <img src="cid:european_central_bank" alt="Banco Central Europeu" class="news-image">
                     </div>
-                    {/* Adicione outros news-items aqui, lembrando de embutir as imagens */}
                 </div>
         
                 <p class="footer-email">Atenciosamente,<br><strong>Equipe YoungCash</strong></p>
