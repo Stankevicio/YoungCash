@@ -38,9 +38,9 @@ $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['no
                 <div class="collapse navbar-collapse" id="targetNavegacaoSuporte">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="home.php">Início</a></li>
-                        <li class="nav-item"><a class="nav-link" href="estudo.php">Aprenda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="formularios.php">Painel</a></li>
-                        <li class="nav-item"><a class="nav-link" href="simulador_invest.php">Investimento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="cursos.php">Aprenda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="alunoPainel.php">Painel</a></li>
+                        <li class="nav-item"><a class="nav-link" href="invest.php">Investimento</a></li>
                         <li class="nav-item"><a class="nav-link active" href="suporte.php">Suporte</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
@@ -56,7 +56,7 @@ $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['no
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdownSuporte">
                                 <a class="dropdown-item" href="perfil.php">Meu Perfil</a>
-                                <a class="dropdown-item" href="settings.php">Configurações</a>
+                                <a class="dropdown-item" href="configuracoes.php">Configurações</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="sair.php" id="link-sair">Sair</a>
                             </div>
@@ -91,7 +91,7 @@ $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['no
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link" href="index.php">Home Pública</a></li>
                         <li class="nav-item"><a class="nav-link" href="home.php">Minha Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="planos.html">Planos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="planos.php">Planos</a></li>
                     </ul>
                 </nav>
                 <div class="col-md-5 col-12 text-center text-md-right social-icon">
@@ -135,7 +135,7 @@ $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['no
             } else if (lowerUserMessage.includes('trocar senha') || lowerUserMessage.includes('mudar senha') || lowerUserMessage.includes('redefinir senha')) {
                 response = 'Para alterar sua senha, vá até a página de "Configurações" no menu do seu perfil. Lá você encontrará a opção para definir uma nova senha.';
             } else if (lowerUserMessage.includes('pagamento') || lowerUserMessage.includes('formas de pagamento') || lowerUserMessage.includes('assinar') || lowerUserMessage.includes('planos')) {
-                response = 'Você pode ver nossos planos e formas de pagamento na página de <a href="planos.html">Planos de Assinatura</a>. Aceitamos cartão de crédito e boleto.';
+                response = 'Você pode ver nossos planos e formas de pagamento na página de <a href="planos.php">Planos de Assinatura</a>. Aceitamos cartão de crédito e boleto.';
             } else if (lowerUserMessage.includes('dica') && (lowerUserMessage.includes('investir') || lowerUserMessage.includes('economia') || lowerUserMessage.includes('financeira'))) {
                 response = 'Uma ótima dica financeira é sempre separar uma parte da sua renda para investimentos, mesmo que seja pouco. Comece pela reserva de emergência! Explore nossos cursos na seção "Aprenda" para mais dicas.';
             } else if (lowerUserMessage.includes('cancelar') && (lowerUserMessage.includes('curso') || lowerUserMessage.includes('assinatura'))) {
