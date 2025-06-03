@@ -11,38 +11,127 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['nome']) : 'Usuário';
 
-// Dados dos cursos com mais detalhes para o modal
-$cursos_todos = [ // Vamos juntar e dar IDs únicos
-    1 => ['id' => 1, 'img' => 'img/educacao-financeira5.jpg', 'titulo' => 'Java COMPLETO Programação OO + Projetos', 'subtitulo' => 'Aprenda Java na prática com projetos!', 'autor' => 'Nelio Alves', 'avaliacao' => '⭐ 4,8 (60.515)', 'preco_atual' => 'R$32,90', 'preco_antigo' => 'R$196,90', 'tag' => 'Mais Vendidos', 'link_detalhes' => 'cursos_detalhe_pagina.php?id=1', 'o_que_aprendera_lista' => ['Conceitos de Java', 'Orientação a Objetos', 'Projetos Práticos'], 'desconto_info' => '⏳ 36 horas restantes com esse desconto!'],
-    2 => ['id' => 2, 'img' => 'img/educacao-financeira2.png', 'titulo' => 'Python para Data Science e Machine Learning COMPLETO', 'subtitulo' => 'Domine Python para análise de dados.', 'autor' => 'Jose Portilla', 'avaliacao' => '⭐ 4,7 (102.330)', 'preco_atual' => 'R$39,90', 'preco_antigo' => 'R$249,90', 'tag' => 'Popular', 'link_detalhes' => 'cursos_detalhe_pagina.php?id=2', 'o_que_aprendera_lista' => ['Fundamentos de Python', 'Bibliotecas NumPy e Pandas', 'Machine Learning'], 'desconto_info' => '⏳ 24 horas restantes com esse desconto!'],
-    3 => ['id' => 3, 'img' => 'img/educacao-financeira3.jpg', 'titulo' => 'Web Design Completo: HTML5, CSS3, JS, PHP e MySQL', 'subtitulo' => 'Crie sites dinâmicos do zero.', 'autor' => 'André Milfont', 'avaliacao' => '⭐ 4,6 (35.780)', 'preco_atual' => 'R$27,90', 'preco_antigo' => 'R$179,90', 'link_detalhes' => 'cursos_detalhe_pagina.php?id=3', 'o_que_aprendera_lista' => ['HTML5 e Semântica', 'CSS3 Avançado e Flexbox/Grid', 'JavaScript Interativo'], 'desconto_info' => '⏳ 48 horas restantes com esse desconto!'],
-    4 => ['id' => 4, 'img' => 'img/educacao-financeira4.png', 'titulo' => 'Marketing Digital Completo Para Iniciantes 2024', 'subtitulo' => 'Lance sua carreira no Marketing Digital.', 'autor' => 'Diego Davila', 'avaliacao' => '⭐ 4,5 (48.115)', 'preco_atual' => 'R$22,90', 'preco_antigo' => 'R$129,90', 'tag' => 'Novo', 'link_detalhes' => 'cursos_detalhe_pagina.php?id=4', 'o_que_aprendera_lista' => ['SEO e SEM', 'Mídias Sociais', 'Email Marketing'], 'desconto_info' => '⏳ Últimas Vagas!'],
-    5 => ['id' => 5, 'img' => 'img/educacao-financeira6.jpg', 'titulo' => 'Excel Completo do Básico ao Avançado (com VBA)', 'subtitulo' => 'Torne-se um expert em Excel.', 'autor' => 'Karen Abecia', 'avaliacao' => '⭐ 4,9 (75.420)', 'preco_atual' => 'R$45,90', 'preco_antigo' => 'R$299,90', 'link_detalhes' => 'cursos_detalhe_pagina.php?id=5', 'o_que_aprendera_lista' => ['Fórmulas Essenciais', 'Tabelas Dinâmicas', 'Macros com VBA'], 'desconto_info' => '⏳ Oferta Especial!'],
-    6 => ['id' => 6, 'img' => 'img/educacao-financeira7.webp', 'titulo' => 'Finanças Pessoais e Investimentos: Guia Completo', 'subtitulo' => 'Assuma o controle da sua vida financeira.', 'autor' => 'Gustavo Cerbasi', 'avaliacao' => '⭐ 4,8 (50.600)', 'preco_atual' => 'R$35,90', 'preco_antigo' => 'R$219,90', 'tag' => 'Recomendado', 'link_detalhes' => 'cursos_detalhe_pagina.php?id=6', 'o_que_aprendera_lista' => ['Orçamento Pessoal', 'Tipos de Investimento', 'Planejamento Financeiro'], 'desconto_info' => '⏳ Bônus Exclusivo!'],
-    7 => ['id' => 7, 'img' => 'img/educacao-financeira1.png', 'titulo' => 'Lógica de Programação Essencial', 'subtitulo' => 'A base para se tornar um programador.', 'autor' => 'Denilson Bonatti', 'avaliacao' => '⭐ 4,7 (40.123)', 'preco_atual' => 'R$22,90', 'preco_antigo' => 'R$159,90', 'link_detalhes' => 'cursos_detalhe_pagina.php?id=7', 'o_que_aprendera_lista' => ['Algoritmos', 'Estruturas de Dados', 'Resolução de Problemas'], 'desconto_info' => '⏳ Vagas Limitadas!'],
+// --- DADOS DOS CURSOS COM TEMAS DE EDUCAÇÃO FINANCEIRA, MAS COM AS IMAGENS ORIGINAIS ---
+$cursos_todos = [
+    1 => [
+        'id' => 1,
+        'img' => 'img/educacao-financeira5.jpg', // Imagem original mantida
+        'titulo' => 'Orçamento Pessoal Inteligente: Do Zero à Organização',
+        'subtitulo' => 'Aprenda a controlar seus gastos, criar um orçamento eficaz e alcançar seus objetivos.',
+        'autor' => 'Carolina Finanças', // Novo autor
+        'avaliacao' => '⭐ 4,9 (12.345)',
+        'preco_atual' => 'R$29,90',
+        'preco_antigo' => 'R$149,90',
+        'tag' => 'Essencial',
+        'link_detalhes' => 'cursos_detalhe_pagina.php?id=1',
+        'o_que_aprendera_lista' => ['Como rastrear suas despesas e receitas.', 'Criar um orçamento mensal realista.', 'Definir metas financeiras.', 'Estratégias para reduzir dívidas.'],
+        'desconto_info' => '⏳ Últimas horas com 80% OFF!'
+    ],
+    2 => [
+        'id' => 2,
+        'img' => 'img/educacao-financeira2.png', // Imagem original mantida
+        'titulo' => 'Investimentos para Iniciantes: Comece com Segurança',
+        'subtitulo' => 'Perca o medo de investir! Entenda os principais tipos de investimento.',
+        'autor' => 'Ricardo Investe',
+        'avaliacao' => '⭐ 4,7 (22.870)',
+        'preco_atual' => 'R$39,90',
+        'preco_antigo' => 'R$229,90',
+        'tag' => 'Popular',
+        'link_detalhes' => 'cursos_detalhe_pagina.php?id=2',
+        'o_que_aprendera_lista' => ['Renda fixa vs. Renda variável.', 'Tesouro Direto e CDBs.', 'Diversificação de carteira.', 'Escolhendo uma corretora.'],
+        'desconto_info' => '🔥 Curso em alta!'
+    ],
+    3 => [
+        'id' => 3,
+        'img' => 'img/educacao-financeira3.jpg', // Imagem original mantida
+        'titulo' => 'Mentalidade Financeira de Sucesso',
+        'subtitulo' => 'Reprograme sua relação com o dinheiro e desenvolva hábitos de prosperidade.',
+        'autor' => 'Sofia MentePróspera',
+        'avaliacao' => '⭐ 4,8 (8.910)',
+        'preco_atual' => 'R$27,90',
+        'preco_antigo' => 'R$189,90',
+        'link_detalhes' => 'cursos_detalhe_pagina.php?id=3',
+        'o_que_aprendera_lista' => ['Identificar crenças limitantes.', 'Desenvolver disciplina financeira.', 'Comportamento e finanças.', 'Visão de longo prazo.'],
+        'desconto_info' => '✨ Transforme sua vida financeira!'
+    ],
+    4 => [
+        'id' => 4,
+        'img' => 'img/educacao-financeira4.png', // Imagem original mantida
+        'titulo' => 'Fontes de Renda Extra Online',
+        'subtitulo' => 'Explore formas de gerar renda complementar usando a internet em 2025.',
+        'autor' => 'Marcos Empreende',
+        'avaliacao' => '⭐ 4,6 (15.200)',
+        'preco_atual' => 'R$22,90',
+        'preco_antigo' => 'R$159,90',
+        'tag' => 'Novo',
+        'link_detalhes' => 'cursos_detalhe_pagina.php?id=4',
+        'o_que_aprendera_lista' => ['Negócios online de baixo custo.', 'Monetizar habilidades e hobbies.', 'Trabalho freelancer.', 'Marketing de afiliados.'],
+        'desconto_info' => '🚀 Lance sua ideia online!'
+    ],
+    5 => [
+        'id' => 5,
+        'img' => 'img/educacao-financeira6.jpg', // Imagem original mantida
+        'titulo' => 'Planejamento para Aposentadoria Tranquila',
+        'subtitulo' => 'Aprenda a planejar seu futuro e viver com segurança financeira na aposentadoria.',
+        'autor' => 'Valéria FuturoSeguro',
+        'avaliacao' => '⭐ 4,9 (9.850)',
+        'preco_atual' => 'R$45,90',
+        'preco_antigo' => 'R$299,90',
+        'link_detalhes' => 'cursos_detalhe_pagina.php?id=5',
+        'o_que_aprendera_lista' => ['Previdência pública e privada.', 'Cálculo de necessidades futuras.', 'Investimentos para longo prazo.', 'Estratégias de resgate.'],
+        'desconto_info' => '⏳ Vagas se esgotando!'
+    ],
+    6 => [
+        'id' => 6,
+        'img' => 'img/educacao-financeira7.webp', // Imagem original mantida
+        'titulo' => 'Saindo das Dívidas: Guia Prático',
+        'subtitulo' => 'Métodos eficazes para negociar, quitar dívidas e alcançar sua liberdade financeira.',
+        'autor' => 'Roberto SemDívidas',
+        'avaliacao' => '⭐ 4,7 (11.500)',
+        'preco_atual' => 'R$35,90',
+        'preco_antigo' => 'R$219,90',
+        'tag' => 'Recomendado',
+        'link_detalhes' => 'cursos_detalhe_pagina.php?id=6',
+        'o_que_aprendera_lista' => ['Diagnóstico de endividamento.', 'Técnicas de negociação.', 'Evitando novas dívidas.', 'Plano de quitação eficiente.'],
+        'desconto_info' => '🎁 Bônus: Planilha Exclusiva!'
+    ],
+    7 => [
+        'id' => 7,
+        'img' => 'img/educacao-financeira1.png', // Imagem original mantida
+        'titulo' => 'Imposto de Renda para Investidores',
+        'subtitulo' => 'Declare seus investimentos em Renda Fixa e Variável corretamente e evite problemas.',
+        'autor' => 'Contadora Ana Fiscal',
+        'avaliacao' => '⭐ 4,8 (7.230)',
+        'preco_atual' => 'R$22,90',
+        'preco_antigo' => 'R$159,90',
+        'link_detalhes' => 'cursos_detalhe_pagina.php?id=7',
+        'o_que_aprendera_lista' => ['Regras do IR para investimentos.', 'Declaração de Ações e FIIs.', 'Cálculo e pagamento de DARFs.', 'Evitando a malha fina.'],
+        'desconto_info' => '🔔 Atualizado para 2025!'
+    ]
 ];
 
-// Separar em recomendados e visualizados para o layout da página
-// Aqui você pode ter uma lógica mais complexa para definir quais são quais
-$cursos_recomendados = array_slice($cursos_todos, 0, 4, true); // Pega os primeiros 4 como recomendados
-$cursos_visualizados = array_slice($cursos_todos, 4, null, true); // Pega o restante como visualizados
+$cursos_recomendados = array_slice($cursos_todos, 0, 4, true);
+$cursos_visualizados = array_slice($cursos_todos, 4, null, true);
 
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Aprenda | YoungCash</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilo_cursos.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Aprenda | YoungCash</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/estilo_cursos.css">
+    </head>
 
 <body>
 
@@ -59,17 +148,24 @@ $cursos_visualizados = array_slice($cursos_todos, 4, null, true); // Pega o rest
                         <li class="nav-item"><a class="nav-link active" href="cursos.php">Aprenda</a></li>
                         <li class="nav-item"><a class="nav-link" href="alunoPainel.php">Painel</a></li>
                         <li class="nav-item"><a class="nav-link" href="invest.php">Investimento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="suporte.php">Suporte</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="carrinho.php" title="Meu Carrinho">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="badge badge-pill badge-danger" id="contador-carrinho-nav">0</span>
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdownEstudo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-user-circle"></i> Olá, <?php echo $nome_usuario_logado; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdownEstudo">
                                 <a class="dropdown-item" href="perfil.php">Meu Perfil</a>
-                                <a class="dropdown-item" href="configuracoes.php">Configurações</a>
+                                <a class="dropdown-item" href="settings.php">Configurações</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="sair.php">Sair</a>
+                                <a class="dropdown-item" href="sair.php" id="link-sair-cursos">Sair</a>
                             </div>
                         </li>
                     </ul>
@@ -87,44 +183,54 @@ $cursos_visualizados = array_slice($cursos_todos, 4, null, true); // Pega o rest
 
         <h2 class="section-title-cursos">Recomendado para Você</h2>
         <div class="curso-container-scrollable">
-            <?php foreach ($cursos_recomendados as $id => $curso): ?>
-                <div class="curso-card curso-card-clicavel" data-curso-id="<?php echo $id; ?>">
-                    <img src="<?php echo htmlspecialchars($curso['img']); ?>" alt="<?php echo htmlspecialchars($curso['titulo']); ?>">
-                    <h3><?php echo htmlspecialchars($curso['titulo']); ?></h3>
-                    <p class="autor"><?php echo htmlspecialchars($curso['autor']); ?></p>
-                    <p class="avaliacao"><?php echo htmlspecialchars($curso['avaliacao']); ?></p>
-                    <p class="preco">
-                        <span class="preco-atual"><?php echo htmlspecialchars($curso['preco_atual']); ?></span>
-                        <?php if (!empty($curso['preco_antigo'])): ?>
-                            <span class="preco-antigo"><?php echo htmlspecialchars($curso['preco_antigo']); ?></span>
+            <?php if (!empty($cursos_recomendados)): ?>
+                <?php foreach ($cursos_recomendados as $id => $curso): ?>
+                    <div class="curso-card curso-card-clicavel" data-curso-id="<?php echo $id; // Usando o ID do array $cursos_todos 
+                                                                                ?>">
+                        <img src="<?php echo htmlspecialchars($curso['img']); ?>" alt="<?php echo htmlspecialchars($curso['titulo']); ?>">
+                        <h3><?php echo htmlspecialchars($curso['titulo']); ?></h3>
+                        <p class="autor"><?php echo htmlspecialchars($curso['autor']); ?></p>
+                        <p class="avaliacao"><?php echo htmlspecialchars($curso['avaliacao']); ?></p>
+                        <p class="preco">
+                            <span class="preco-atual"><?php echo htmlspecialchars($curso['preco_atual']); ?></span>
+                            <?php if (!empty($curso['preco_antigo'])): ?>
+                                <span class="preco-antigo"><?php echo htmlspecialchars($curso['preco_antigo']); ?></span>
+                            <?php endif; ?>
+                        </p>
+                        <?php if (!empty($curso['tag'])): ?>
+                            <div class="btn-tag"><?php echo htmlspecialchars($curso['tag']); ?></div>
                         <?php endif; ?>
-                    </p>
-                    <?php if (!empty($curso['tag'])): ?>
-                        <div class="btn-tag"><?php echo htmlspecialchars($curso['tag']); ?></div>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Nenhum curso recomendado no momento.</p>
+            <?php endif; ?>
         </div>
 
         <h2 class="section-title-cursos">Os Alunos Estão Visualizando</h2>
         <div class="curso-container-scrollable">
-            <?php foreach ($cursos_visualizados as $id => $curso): ?>
-                <div class="curso-card curso-card-clicavel" data-curso-id="<?php echo $id; ?>">
-                    <img src="<?php echo htmlspecialchars($curso['img']); ?>" alt="<?php echo htmlspecialchars($curso['titulo']); ?>">
-                    <h3><?php echo htmlspecialchars($curso['titulo']); ?></h3>
-                    <p class="autor"><?php echo htmlspecialchars($curso['autor']); ?></p>
-                    <p class="avaliacao"><?php echo htmlspecialchars($curso['avaliacao']); ?></p>
-                    <p class="preco">
-                        <span class="preco-atual"><?php echo htmlspecialchars($curso['preco_atual']); ?></span>
-                        <?php if (!empty($curso['preco_antigo'])): ?>
-                            <span class="preco-antigo"><?php echo htmlspecialchars($curso['preco_antigo']); ?></span>
+            <?php if (!empty($cursos_visualizados)): ?>
+                <?php foreach ($cursos_visualizados as $id => $curso): ?>
+                    <div class="curso-card curso-card-clicavel" data-curso-id="<?php echo $id; // Usando o ID do array $cursos_todos 
+                                                                                ?>">
+                        <img src="<?php echo htmlspecialchars($curso['img']); ?>" alt="<?php echo htmlspecialchars($curso['titulo']); ?>">
+                        <h3><?php echo htmlspecialchars($curso['titulo']); ?></h3>
+                        <p class="autor"><?php echo htmlspecialchars($curso['autor']); ?></p>
+                        <p class="avaliacao"><?php echo htmlspecialchars($curso['avaliacao']); ?></p>
+                        <p class="preco">
+                            <span class="preco-atual"><?php echo htmlspecialchars($curso['preco_atual']); ?></span>
+                            <?php if (!empty($curso['preco_antigo'])): ?>
+                                <span class="preco-antigo"><?php echo htmlspecialchars($curso['preco_antigo']); ?></span>
+                            <?php endif; ?>
+                        </p>
+                        <?php if (!empty($curso['tag'])): ?>
+                            <div class="btn-tag"><?php echo htmlspecialchars($curso['tag']); ?></div>
                         <?php endif; ?>
-                    </p>
-                    <?php if (!empty($curso['tag'])): ?>
-                        <div class="btn-tag"><?php echo htmlspecialchars($curso['tag']); ?></div>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Nenhum curso sendo visualizado no momento.</p>
+            <?php endif; ?>
         </div>
     </main>
 
@@ -141,18 +247,16 @@ $cursos_visualizados = array_slice($cursos_todos, 4, null, true); // Pega o rest
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-8 curso-detalhe-main">
-                                <h2 id="modal-curso-subtitulo" style="font-size: 1.2em; color: var(--yc-text-muted); margin-bottom:10px;">Subtítulo do curso</h2>
+                                <h2 id="modal-curso-subtitulo" style="font-size: 1.2em; color: var(--yc-text-muted); margin-bottom:10px;"></h2>
                                 <p class="autor">Criado por: <span id="modal-curso-autor"></span></p>
                                 <p class="avaliacao"><span id="modal-curso-avaliacao"></span></p>
-
                                 <div class="learn-box">
                                     <h4>O que você aprenderá</h4>
-                                    <ul id="modal-curso-aprendera-lista">
-                                    </ul>
+                                    <ul id="modal-curso-aprendera-lista"></ul>
                                 </div>
                             </div>
                             <div class="col-md-4 curso-detalhe-sidebar">
-                                <img src="" alt="Thumbnail do Curso" id="modal-curso-img" class="video-thumbnail">
+                                <img src="" alt="Thumbnail do Curso" id="modal-curso-img" class="video-thumbnail" style="width:100%; height:auto; border-radius:var(--yc-border-radius); margin-bottom:15px;">
                                 <div class="price-info">
                                     <div class="price"><span id="modal-curso-preco-atual"></span> <span class="old-price" id="modal-curso-preco-antigo"></span></div>
                                     <div class="discount" id="modal-curso-desconto"></div>
@@ -176,7 +280,6 @@ $cursos_visualizados = array_slice($cursos_todos, 4, null, true); // Pega o rest
             <button onclick="fecharPopupFeedbackCarrinho()" class="btn-popup-ok">OK</button>
         </div>
     </div>
-
 
     <footer class="main-footer">
         <div class="container">
@@ -206,6 +309,7 @@ $cursos_visualizados = array_slice($cursos_todos, 4, null, true); // Pega o rest
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
     <script>
         window.youngCashCursosData = {
             cursos: <?php echo json_encode($cursos_todos, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE); ?>

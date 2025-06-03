@@ -113,33 +113,33 @@ try {
         $cursos_do_aluno_array = [
             [
                 'id' => 101,
-                'nome' => 'Python para Data Science e Machine Learning COMPLETO',
+                'nome' => 'Orçamento Pessoal Inteligente: Do Zero à Organização',
                 'descricao' => 'Organize suas finanças pessoais e comece a poupar.',
                 'categoria' => 'Finanças Pessoais',
                 'total_aulas' => 20,
-                'professor_nome' => 'Prof. John',
+                'professor_nome' => 'Prof. Tadeu',
                 'data_inscricao' => date("Y-m-d H:i:s", strtotime("-5 days")),
                 'progresso' => 75,
                 'aulas_concluidas' => 15
             ],
             [
                 'id' => 102,
-                'nome' => 'Marketing Digital Completo Para Iniciantes 2024',
-                'descricao' => 'Descubra como investir de forma inteligente.',
+                'nome' => 'Fontes de Renda Extra Online',
+                'descricao' => 'Descubra novas formas de renda utilizando a internet!',
                 'categoria' => 'Investimentos',
                 'total_aulas' => 15,
-                'professor_nome' => 'Profa. Demonstrativa',
+                'professor_nome' => 'Profa. Aline',
                 'data_inscricao' => date("Y-m-d H:i:s", strtotime("-2 days")),
                 'progresso' => 33,
                 'aulas_concluidas' => 5
             ],
             [
                 'id' => 103,
-                'nome' => 'Finanças Pessoais e Investimentos: Guia Completo',
-                'descricao' => 'Garanta um futuro financeiro tranquilo.',
+                'nome' => 'Saindo das Dívidas: Guia Prático',
+                'descricao' => 'Garanta um futuro financeiro sem dívidas.',
                 'categoria' => 'Planejamento',
                 'total_aulas' => 12,
-                'professor_nome' => 'Prof. Demonstrativo',
+                'professor_nome' => 'Profa. Geralda',
                 'data_inscricao' => date("Y-m-d H:i:s", strtotime("-10 days")),
                 'progresso' => 10,
                 'aulas_concluidas' => 1
