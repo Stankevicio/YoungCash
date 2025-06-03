@@ -599,3 +599,85 @@ body {
 .modal-lg {
   max-width: 800px;
 }
+
+.yc-feedback-popup-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 1060; /* Acima do modal de detalhes do curso, se estiver aberto */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    animation: fadeInOverlayFeedback 0.2s ease-out;
+}
+
+@keyframes fadeInOverlayFeedback {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.yc-feedback-popup-content {
+    background: var(--yc-white, #fff);
+    padding: 25px 30px;
+    border-radius: var(--yc-border-radius-lg, 0.5rem);
+    box-shadow: var(--yc-box-shadow-lg, 0 0.5rem 1.5rem rgba(0,0,0,0.2));
+    text-align: center;
+    width: 90%;
+    max-width: 400px; 
+    position: relative; 
+    animation: popupZoomInFeedback 0.2s ease-out;
+}
+@keyframes popupZoomInFeedback {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.yc-feedback-popup-content h3 {
+    font-family: var(--yc-font-header, 'Roboto', sans-serif);
+    font-size: 1.4em; 
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.yc-feedback-popup-content h3 i { /* Ícone no título */
+    font-size: 1.3em;
+}
+.yc-feedback-popup-content h3 .fa-check-circle { color: #28a745; /* Verde sucesso */ }
+.yc-feedback-popup-content h3 .fa-info-circle { color: var(--yc-accent); /* Amarelo para aviso/info */ }
+.yc-feedback-popup-content h3 .fa-exclamation-triangle { color: #dc3545; /* Vermelho para erro */ }
+
+
+.yc-feedback-popup-content p {
+    font-size: 1em;
+    color: var(--yc-text-muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.yc-feedback-popup-content .btn-popup-ok { 
+    background-color: var(--yc-primary);
+    color: var(--yc-white);
+    padding: 10px 30px;
+    border: none;
+    border-radius: var(--yc-border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1em;
+    font-family: var(--yc-font-sans-serif);
+    transition: background-color 0.2s ease;
+}
+.yc-feedback-popup-content .btn-popup-ok:hover {
+    background-color: var(--yc-secondary);
+}
+
+.yc-feedback-popup-content .yc-popup-close { /* Se você adicionar um botão X */
+    position: absolute; top: 10px; right: 15px;
+    font-size: 1.8rem; color: var(--yc-text-muted);
+    cursor: pointer; line-height: 1;
+    background: none; border: none;
+}
+.yc-feedback-popup-content .yc-popup-close:hover { color: var(--yc-dark); }

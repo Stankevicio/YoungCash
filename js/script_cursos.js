@@ -1,13 +1,78 @@
-// No início do script-cursos.js, esperamos que window.youngCashCursosData.todosCursos exista
+// js/script_cursos.js
+
+const CHAVE_LOCALSTORAGE_CARRINHO = "cursosNoCarrinho";
+
+// Função para escapar caracteres HTML (útil ao construir HTML dinamicamente)
+function htmlspecialchars(str) {
+  if (typeof str !== "string") return str;
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return str.replace(/[&<>"']/g, function (m) {
+    return map[m];
+  });
+}
+
+// Elementos do popup de feedback (definidos globalmente no script se o popup está no HTML principal)
+const popupFeedbackCarrinho = document.getElementById("popupFeedbackCarrinho");
+const feedbackPopupTituloEl = document.getElementById("feedbackPopupTitulo");
+const feedbackPopupMensagemEl = document.getElementById(
+  "feedbackPopupMensagem"
+);
+
+function mostrarPopupFeedback(titulo, mensagem, tipoIcone = "info") {
+  if (
+    popupFeedbackCarrinho &&
+    feedbackPopupTituloEl &&
+    feedbackPopupMensagemEl
+  ) {
+    let iconeClasse = "fas fa-info-circle"; // Ícone padrão
+    let tituloEscapado = htmlspecialchars(titulo); // Escapa o título para segurança no innerHTML
+
+    if (tipoIcone === "success") {
+      iconeClasse = "fas fa-check-circle";
+    } else if (tipoIcone === "warning") {
+      iconeClasse = "fas fa-exclamation-triangle";
+    } else if (tipoIcone === "error") {
+      iconeClasse = "fas fa-times-circle";
+    }
+
+    feedbackPopupTituloEl.innerHTML = `<i class="${iconeClasse}"></i> <span>${tituloEscapado}</span>`;
+
+    // A mensagem já está formatada como queremos (com aspas literais ao redor do título do curso).
+    // Como estamos usando textContent para a mensagem principal, não precisamos escapar a string inteira novamente.
+    // O curso.titulo dentro da 'mensagem' já foi tratado pelo json_encode no PHP
+    // e as aspas literais são intencionais na string template.
+    feedbackPopupMensagemEl.textContent = mensagem;
+
+    popupFeedbackCarrinho.style.display = "flex";
+  } else {
+    // Fallback para alert (o alert já trata texto como texto)
+    alert(titulo + "\n" + mensagem);
+  }
+}
+
+function fecharPopupFeedbackCarrinho() {
+  if (popupFeedbackCarrinho) popupFeedbackCarrinho.style.display = "none";
+}
 
 function adicionarAoCarrinhoModal(curso) {
-  const CHAVE_LOCALSTORAGE_CARRINHO = "cursosNoCarrinho"; // Definindo a chave aqui também
   let carrinho =
     JSON.parse(localStorage.getItem(CHAVE_LOCALSTORAGE_CARRINHO)) || [];
 
   const cursoExistente = carrinho.find((item) => item.id === curso.id);
   if (cursoExistente) {
-    alert("Este curso já está no seu carrinho!");
+    // O título do curso (curso.titulo) já é uma string JS segura vinda do json_encode.
+    // As aspas literais são adicionadas aqui para a mensagem.
+    mostrarPopupFeedback(
+      "Atenção!",
+      `O curso "${curso.titulo}" já está no seu carrinho.`,
+      "warning"
+    );
     return;
   }
 
@@ -18,9 +83,13 @@ function adicionarAoCarrinhoModal(curso) {
     preco: curso.preco_atual,
   });
   localStorage.setItem(CHAVE_LOCALSTORAGE_CARRINHO, JSON.stringify(carrinho));
-  alert('"' + curso.titulo + '" adicionado ao carrinho!');
 
-  // Atualizar contador na navbar (se existir)
+  mostrarPopupFeedback(
+    "Sucesso!",
+    `"${curso.titulo}" foi adicionado ao carrinho!`,
+    "success"
+  );
+
   const contadorCarrinhoNav = document.getElementById("contador-carrinho-nav");
   if (contadorCarrinhoNav) {
     contadorCarrinhoNav.textContent = carrinho.length.toString();
@@ -28,7 +97,6 @@ function adicionarAoCarrinhoModal(curso) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Verifica se os dados dos cursos foram passados corretamente
   if (
     typeof window.youngCashCursosData === "undefined" ||
     typeof window.youngCashCursosData.cursos === "undefined"
@@ -36,14 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error(
       "Dados dos cursos (window.youngCashCursosData.cursos) não foram encontrados ou não foram passados pelo PHP."
     );
-    return; // Interrompe a execução se os dados não estiverem disponíveis
+    return;
   }
   const todosCursos = window.youngCashCursosData.cursos;
 
   const cursoCards = document.querySelectorAll(".curso-card-clicavel");
   const modalElement = document.getElementById("cursoModal");
 
-  // Elementos do Modal para popular (verifique se todos existem no seu HTML do modal)
   const modalTitulo = document.getElementById("modal-curso-titulo");
   const modalSubtitulo = document.getElementById("modal-curso-subtitulo");
   const modalAutor = document.getElementById("modal-curso-autor");
@@ -61,33 +128,50 @@ document.addEventListener("DOMContentLoaded", () => {
   cursoCards.forEach((card) => {
     card.addEventListener("click", function () {
       const cursoId = this.dataset.cursoId;
-      const cursoData = todosCursos[cursoId]; // Acessa o curso pelo ID/chave
+      const cursoData = todosCursos[cursoId];
 
       if (cursoData && modalElement) {
         if (modalTitulo)
-          modalTitulo.textContent = cursoData.titulo || "Detalhes do Curso";
+          modalTitulo.textContent = htmlspecialchars(
+            cursoData.titulo || "Detalhes do Curso"
+          );
         if (modalSubtitulo)
-          modalSubtitulo.textContent = cursoData.subtitulo || "";
-        if (modalAutor) modalAutor.textContent = cursoData.autor || "N/A";
+          modalSubtitulo.textContent = htmlspecialchars(
+            cursoData.subtitulo || ""
+          );
+        if (modalAutor)
+          modalAutor.textContent = htmlspecialchars(cursoData.autor || "N/A");
         if (modalAvaliacao)
-          modalAvaliacao.textContent = cursoData.avaliacao || "N/A";
+          modalAvaliacao.textContent = htmlspecialchars(
+            cursoData.avaliacao || "N/A"
+          );
         if (modalImg) {
-          modalImg.src = cursoData.img || "img/placeholder.jpg";
-          modalImg.alt = cursoData.titulo || "Thumbnail do Curso";
+          modalImg.src = htmlspecialchars(
+            cursoData.img || "img/placeholder.jpg"
+          );
+          modalImg.alt = htmlspecialchars(
+            cursoData.titulo || "Thumbnail do Curso"
+          );
         }
         if (modalPrecoAtual)
-          modalPrecoAtual.textContent = cursoData.preco_atual || "";
+          modalPrecoAtual.textContent = htmlspecialchars(
+            cursoData.preco_atual || ""
+          );
 
         if (modalPrecoAntigo) {
           if (cursoData.preco_antigo) {
-            modalPrecoAntigo.textContent = cursoData.preco_antigo;
+            modalPrecoAntigo.textContent = htmlspecialchars(
+              cursoData.preco_antigo
+            );
             modalPrecoAntigo.style.display = "inline";
           } else {
             modalPrecoAntigo.style.display = "none";
           }
         }
         if (modalDescontoInfo)
-          modalDescontoInfo.textContent = cursoData.desconto_info || "";
+          modalDescontoInfo.textContent = htmlspecialchars(
+            cursoData.desconto_info || ""
+          );
 
         if (modalAprenderaLista) {
           modalAprenderaLista.innerHTML = "";
@@ -100,28 +184,28 @@ document.addEventListener("DOMContentLoaded", () => {
               const icon = document.createElement("i");
               icon.className = "fas fa-check";
               li.appendChild(icon);
-              li.appendChild(document.createTextNode(" " + item));
+              // O item da lista também deve ser escapado se for para textNode
+              li.appendChild(
+                document.createTextNode(" " + htmlspecialchars(item))
+              );
               modalAprenderaLista.appendChild(li);
             });
           }
         }
-
         if (modalLinkDetalhes)
-          modalLinkDetalhes.href = cursoData.link_detalhes || "#";
-
+          modalLinkDetalhes.href = htmlspecialchars(
+            cursoData.link_detalhes || "#"
+          );
         if (modalBtnCarrinho) {
           modalBtnCarrinho.onclick = function () {
-            // Redefine o onclick para o curso atual
             adicionarAoCarrinhoModal(cursoData);
           };
         }
-
-        // Para Bootstrap 4, usamos jQuery para mostrar o modal (se jQuery estiver carregado)
         if (typeof $ !== "undefined" && $.fn.modal) {
           $("#cursoModal").modal("show");
         } else {
           console.error(
-            "jQuery ou Bootstrap Modal não estão carregados corretamente para exibir #cursoModal."
+            "jQuery ou Bootstrap Modal não estão carregados para #cursoModal."
           );
         }
       } else {
@@ -133,9 +217,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Atualizar ano no rodapé
   const currentYearElem = document.getElementById("currentYear");
   if (currentYearElem) {
     currentYearElem.textContent = new Date().getFullYear();
+  }
+
+  const contadorCarrinhoNav = document.getElementById("contador-carrinho-nav");
+  if (contadorCarrinhoNav) {
+    const carrinho =
+      JSON.parse(localStorage.getItem(CHAVE_LOCALSTORAGE_CARRINHO)) || [];
+    contadorCarrinhoNav.textContent = carrinho.length.toString();
   }
 });

@@ -408,3 +408,110 @@ body {
     width: 100%;
   }
 }
+
+.yc-popup-overlay {
+    display: none; /* Começa oculto */
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 1050;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    animation: fadeInOverlay 0.3s ease-out;
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.yc-popup-content {
+    background: var(--yc-white, #fff);
+    padding: 25px 30px;
+    border-radius: var(--yc-border-radius-lg, 0.5rem);
+    box-shadow: var(--yc-box-shadow-lg, 0 0.5rem 1.5rem rgba(0,0,0,0.2));
+    text-align: center;
+    width: 90%;
+    max-width: 480px;
+    position: relative; 
+    animation: popupZoomInScale 0.3s ease-out;
+}
+
+@keyframes popupZoomInScale {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.yc-popup-content h3 {
+    font-family: var(--yc-font-header, 'Roboto', sans-serif);
+    color: var(--yc-primary); 
+    font-size: 1.5em; 
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espaço entre ícone e texto */
+}
+.yc-popup-content h3 .fa-question-circle { color: var(--yc-secondary); } /* Para confirmação */
+.yc-popup-content h3 .fa-check-circle { color: #28a745; } /* Verde para sucesso */
+
+
+.yc-popup-content p {
+    font-size: 1.05em;
+    color: var(--yc-text-muted);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.yc-popup-actions {
+    display: flex;
+    justify-content: space-around; /* Ou space-between, center */
+    gap: 15px; /* Espaço entre botões */
+}
+
+.yc-popup-actions button,
+.yc-popup-content > button.btn-primary-yc { /* Botão OK do popup de sucesso */
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--yc-border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1em;
+    font-family: var(--yc-font-sans-serif);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    flex-grow: 1; /* Para que os botões de ação ocupem espaço similar */
+}
+.yc-popup-actions button:hover,
+.yc-popup-content > button.btn-primary-yc:hover {
+    transform: translateY(-1px);
+}
+
+.yc-popup-actions .btn-primary-yc,
+.yc-popup-content > button.btn-primary-yc { /* Botão de confirmação/OK */
+    background-color: var(--yc-primary);
+    color: var(--yc-white);
+}
+.yc-popup-actions .btn-primary-yc:hover,
+.yc-popup-content > button.btn-primary-yc:hover {
+    background-color: var(--yc-secondary);
+}
+
+.yc-popup-actions .btn-secondary-yc { /* Botão de cancelar */
+    background-color: var(--yc-light);
+    color: var(--yc-dark);
+    border: 1px solid var(--yc-text-muted);
+}
+.yc-popup-actions .btn-secondary-yc:hover {
+    background-color: #e2e6ea; /* Um cinza um pouco mais escuro */
+}
+
+/* Opcional: Estilo para o botão de fechar no canto, se você adicionar um */
+.yc-popup-close {
+    position: absolute; top: 10px; right: 15px;
+    font-size: 2rem; color: var(--yc-text-muted);
+    cursor: pointer; line-height: 1;
+    background: none; border: none;
+}
+.yc-popup-close:hover { color: var(--yc-dark); }

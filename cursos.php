@@ -168,6 +168,15 @@ $cursos_visualizados = array_slice($cursos_todos, 4, null, true); // Pega o rest
         </div>
     </div>
 
+    <div id="popupFeedbackCarrinho" class="yc-feedback-popup-overlay" style="display:none;">
+        <div class="yc-feedback-popup-content">
+            <span class="yc-popup-close" onclick="fecharPopupFeedbackCarrinho()">&times;</span>
+            <h3 id="feedbackPopupTitulo"><i class="fas"></i> <span></span></h3>
+            <p id="feedbackPopupMensagem"></p>
+            <button onclick="fecharPopupFeedbackCarrinho()" class="btn-popup-ok">OK</button>
+        </div>
+    </div>
+
 
     <footer class="main-footer">
         <div class="container">

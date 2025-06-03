@@ -42,9 +42,9 @@ $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['no
         <div class="collapse navbar-collapse" id="targetNavegacaoCarrinho">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="home.php">Início</a></li>
-            <li class="nav-item"><a class="nav-link" href="estudo.php">Aprenda</a></li>
-            <li class="nav-item"><a class="nav-link" href="formularios.php">Painel</a></li>
-            <li class="nav-item"><a class="nav-link" href="simulador_invest.php">Investimento</a></li>
+            <li class="nav-item"><a class="nav-link" href="cursos.php">Aprenda</a></li>
+            <li class="nav-item"><a class="nav-link" href="alunoPainel.php">Painel</a></li>
+            <li class="nav-item"><a class="nav-link" href="invest.php">Investimento</a></li>
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -59,7 +59,7 @@ $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['no
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdownCarrinho">
                 <a class="dropdown-item" href="perfil.php">Meu Perfil</a>
-                <a class="dropdown-item" href="settings.php">Configurações</a>
+                <a class="dropdown-item" href="configuracoes.php">Configurações</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="sair.php" id="link-sair">Sair</a>
               </div>
@@ -111,6 +111,26 @@ $nome_usuario_logado = isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['no
       </div>
     </div>
   </footer>
+
+  <div id="popupConfirmacaoCompra" class="yc-popup-overlay" style="display:none;">
+    <div class="yc-popup-content">
+      <span class="yc-popup-close" onclick="fecharPopupConfirmacao()">&times;</span>
+      <h3 id="popupConfirmacaoTitulo"><i class="fas fa-question-circle"></i> Confirmar Compra</h3>
+      <p id="popupConfirmacaoMensagem">Você deseja realmente finalizar sua compra?</p>
+      <div class="yc-popup-actions">
+        <button onclick="cancelarFinalizacaoCompra()" class="btn btn-secondary-yc">Cancelar</button>
+        <button onclick="processarFinalizacaoCompra()" class="btn btn-primary-yc">Sim, Finalizar!</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popupSucessoCompra" class="yc-popup-overlay" style="display:none;">
+    <div class="yc-popup-content">
+      <h3 id="popupSucessoTitulo"><i class="fas fa-check-circle" style="color: #28a745;"></i> Compra Finalizada!</h3>
+      <p id="popupSucessoMensagem">Sua compra foi processada com sucesso (simulação). Seu carrinho foi limpo.</p>
+      <button onclick="fecharPopupSucessoEContinuar()" class="btn btn-primary-yc">OK</button>
+    </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
